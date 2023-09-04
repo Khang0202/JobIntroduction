@@ -12,6 +12,8 @@ import java.util.List;
  * @author nguye
  */
 public interface FacultyRepository {
-    List<Faculty> getFacultys();
-    Faculty getFacultyById(int id);
+    List<Faculty> getAllFacultys();
+    void addFaculty(Faculty faculty);
+    void editFacultyById(int id,String updatedFaculty);
+    void deleteFacultyById(int id);
 }

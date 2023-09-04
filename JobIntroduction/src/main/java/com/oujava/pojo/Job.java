@@ -5,6 +5,8 @@
 package com.oujava.pojo;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -26,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author nguye
+ * @author trann
  */
 @Entity
 @Table(name = "job")
@@ -237,5 +239,15 @@ public class Job implements Serializable {
     public String toString() {
         return "com.oujava.pojo.Job[ id=" + id + " ]";
     }
+
+    public void setDatePosted(String currentDate) {
+    try {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng ngày tháng của chuỗi
+        Date parsedDate = dateFormat.parse(currentDate);
+        this.datePosted = parsedDate;
+    } catch (ParseException e) {
+        // Xử lý ngoại lệ khi không thể chuyển đổi chuỗi thành ngày
+        e.printStackTrace();
+    }    }
     
 }

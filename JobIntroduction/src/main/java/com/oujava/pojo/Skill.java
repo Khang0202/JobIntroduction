@@ -5,9 +5,12 @@
 package com.oujava.pojo;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -18,45 +21,43 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author nguye
+ * @author trann
  */
 @Entity
 @Table(name = "skill")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Skill.findAll", query = "SELECT s FROM Skill s"),
-    @NamedQuery(name = "Skill.findById", query = "SELECT s FROM Skill s WHERE s.skillPK.id = :id"),
-    @NamedQuery(name = "Skill.findByUserid", query = "SELECT s FROM Skill s WHERE s.skillPK.userid = :userid"),
+    @NamedQuery(name = "Skill.findById", query = "SELECT s FROM Skill s WHERE s.id = :id"),
     @NamedQuery(name = "Skill.findBySkill", query = "SELECT s FROM Skill s WHERE s.skill = :skill")})
 public class Skill implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected SkillPK skillPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Size(max = 100)
     @Column(name = "skill")
     private String skill;
-    @JoinColumn(name = "userid", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "userid", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User user;
+    private User userid;
 
     public Skill() {
     }
 
-    public Skill(SkillPK skillPK) {
-        this.skillPK = skillPK;
+    public Skill(Integer id) {
+        this.id = id;
     }
 
-    public Skill(int id, int userid) {
-        this.skillPK = new SkillPK(id, userid);
+    public Integer getId() {
+        return id;
     }
 
-    public SkillPK getSkillPK() {
-        return skillPK;
-    }
-
-    public void setSkillPK(SkillPK skillPK) {
-        this.skillPK = skillPK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getSkill() {
@@ -67,18 +68,18 @@ public class Skill implements Serializable {
         this.skill = skill;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserid() {
+        return userid;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserid(User userid) {
+        this.userid = userid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (skillPK != null ? skillPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -89,7 +90,7 @@ public class Skill implements Serializable {
             return false;
         }
         Skill other = (Skill) object;
-        if ((this.skillPK == null && other.skillPK != null) || (this.skillPK != null && !this.skillPK.equals(other.skillPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -97,7 +98,7 @@ public class Skill implements Serializable {
 
     @Override
     public String toString() {
-        return "com.oujava.pojo.Skill[ skillPK=" + skillPK + " ]";
+        return "com.oujava.pojo.Skill[ id=" + id + " ]";
     }
     
 }

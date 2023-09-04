@@ -5,7 +5,7 @@
 package com.oujava.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author nguye
+ * @author trann
  */
 @Entity
 @Table(name = "permission")
@@ -44,7 +44,7 @@ public class Permission implements Serializable {
     @Column(name = "permission")
     private String permission;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "permissionId")
-    private Set<RolePermission> rolePermissionSet;
+    private Collection<RolePermission> rolePermissionCollection;
 
     public Permission() {
     }
@@ -70,12 +70,12 @@ public class Permission implements Serializable {
     }
 
     @XmlTransient
-    public Set<RolePermission> getRolePermissionSet() {
-        return rolePermissionSet;
+    public Collection<RolePermission> getRolePermissionCollection() {
+        return rolePermissionCollection;
     }
 
-    public void setRolePermissionSet(Set<RolePermission> rolePermissionSet) {
-        this.rolePermissionSet = rolePermissionSet;
+    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
+        this.rolePermissionCollection = rolePermissionCollection;
     }
 
     @Override
