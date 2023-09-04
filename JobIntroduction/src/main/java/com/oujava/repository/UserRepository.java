@@ -4,7 +4,8 @@
  */
 package com.oujava.repository;
 
-import com.oujava.DTO.RegisterDTO;
+import com.oujava.DTO.CandidateDTO;
+import com.oujava.DTO.CustomerDTO;
 import com.oujava.pojo.User;
 import java.util.List;
 
@@ -13,11 +14,11 @@ import java.util.List;
  * @author nguye
  */
 public interface UserRepository {
-     List<User> getAllUsers(); 
+    List<User> getAllUsers(); 
      
-     void login(String username,String password);
-     User register(RegisterDTO register);
-
+    void login(String username,String password);
+    void registerCandidate(CandidateDTO candidate);
+    void registerCustomer(CustomerDTO customer);
     void editRoleByUserId(int userId, int roleId); 
 
     void editActiveByUserId(int userId, boolean active); 

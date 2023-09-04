@@ -9,6 +9,7 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\UserSe
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\FacultyService.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\RoleService.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\FacultyRepository.java
+D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\DTO\CandidateDTO.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\RatingRepository.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Faculty.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\format\GetDate.java
@@ -23,12 +24,12 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\Ap
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\ApiEmploymentTypeController.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\SkillRepositoryImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\UserRepositoryImpl.java
-D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\DTO\RegisterDTO.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Job.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\User.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\EmploymentTypeServiceImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Role.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\RatingService.java
+D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\DTO\CustomerDTO.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Skill.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Apply.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\RatingRepositoryImpl.java
