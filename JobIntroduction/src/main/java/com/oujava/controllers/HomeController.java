@@ -30,7 +30,7 @@ public class HomeController {
     @Transactional
     public String index(Model model){
         Session session = factory.getObject().getCurrentSession();
-        Query q = session.createQuery("from Faculty");
+        Query q = session.createQuery("from Role");
         model.addAttribute("faculty", q.getResultList());
         return "home";
         

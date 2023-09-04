@@ -4,8 +4,9 @@
  */
 package com.oujava.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author nguye
+ * @author trann
  */
 @Entity
 @Table(name = "faculty")
@@ -43,7 +44,8 @@ public class Faculty implements Serializable {
     @Column(name = "faculty")
     private String faculty;
     @OneToMany(mappedBy = "facultyId")
-    private Set<User> userSet;
+    @JsonIgnore
+    private Collection<User> userCollection;
 
     public Faculty() {
     }
@@ -69,12 +71,12 @@ public class Faculty implements Serializable {
     }
 
     @XmlTransient
-    public Set<User> getUserSet() {
-        return userSet;
+    public Collection<User> getUserCollection() {
+        return userCollection;
     }
 
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
+    public void setUserCollection(Collection<User> userCollection) {
+        this.userCollection = userCollection;
     }
 
     @Override

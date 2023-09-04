@@ -5,8 +5,8 @@
 package com.oujava.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author nguye
+ * @author trann
  */
 @Entity
 @Table(name = "user")
@@ -121,17 +121,17 @@ public class User implements Serializable {
     @Column(name = "urlinfo")
     private String urlinfo;
     @OneToMany(mappedBy = "candidateId")
-    private Set<Apply> applySet;
+    private Collection<Apply> applyCollection;
     @OneToMany(mappedBy = "employerId")
-    private Set<Apply> applySet1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Skill> skillSet;
+    private Collection<Apply> applyCollection1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private Collection<Skill> skillCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employerId")
-    private Set<Rating> ratingSet;
+    private Collection<Rating> ratingCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidateId")
-    private Set<Rating> ratingSet1;
+    private Collection<Rating> ratingCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employerId")
-    private Set<Job> jobSet;
+    private Collection<Job> jobCollection;
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     @ManyToOne
     private Faculty facultyId;
@@ -286,57 +286,57 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Set<Apply> getApplySet() {
-        return applySet;
+    public Collection<Apply> getApplyCollection() {
+        return applyCollection;
     }
 
-    public void setApplySet(Set<Apply> applySet) {
-        this.applySet = applySet;
-    }
-
-    @XmlTransient
-    public Set<Apply> getApplySet1() {
-        return applySet1;
-    }
-
-    public void setApplySet1(Set<Apply> applySet1) {
-        this.applySet1 = applySet1;
+    public void setApplyCollection(Collection<Apply> applyCollection) {
+        this.applyCollection = applyCollection;
     }
 
     @XmlTransient
-    public Set<Skill> getSkillSet() {
-        return skillSet;
+    public Collection<Apply> getApplyCollection1() {
+        return applyCollection1;
     }
 
-    public void setSkillSet(Set<Skill> skillSet) {
-        this.skillSet = skillSet;
-    }
-
-    @XmlTransient
-    public Set<Rating> getRatingSet() {
-        return ratingSet;
-    }
-
-    public void setRatingSet(Set<Rating> ratingSet) {
-        this.ratingSet = ratingSet;
+    public void setApplyCollection1(Collection<Apply> applyCollection1) {
+        this.applyCollection1 = applyCollection1;
     }
 
     @XmlTransient
-    public Set<Rating> getRatingSet1() {
-        return ratingSet1;
+    public Collection<Skill> getSkillCollection() {
+        return skillCollection;
     }
 
-    public void setRatingSet1(Set<Rating> ratingSet1) {
-        this.ratingSet1 = ratingSet1;
+    public void setSkillCollection(Collection<Skill> skillCollection) {
+        this.skillCollection = skillCollection;
     }
 
     @XmlTransient
-    public Set<Job> getJobSet() {
-        return jobSet;
+    public Collection<Rating> getRatingCollection() {
+        return ratingCollection;
     }
 
-    public void setJobSet(Set<Job> jobSet) {
-        this.jobSet = jobSet;
+    public void setRatingCollection(Collection<Rating> ratingCollection) {
+        this.ratingCollection = ratingCollection;
+    }
+
+    @XmlTransient
+    public Collection<Rating> getRatingCollection1() {
+        return ratingCollection1;
+    }
+
+    public void setRatingCollection1(Collection<Rating> ratingCollection1) {
+        this.ratingCollection1 = ratingCollection1;
+    }
+
+    @XmlTransient
+    public Collection<Job> getJobCollection() {
+        return jobCollection;
+    }
+
+    public void setJobCollection(Collection<Job> jobCollection) {
+        this.jobCollection = jobCollection;
     }
 
     public Faculty getFacultyId() {

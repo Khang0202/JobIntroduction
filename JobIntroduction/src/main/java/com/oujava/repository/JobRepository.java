@@ -4,10 +4,17 @@
  */
 package com.oujava.repository;
 
+import com.oujava.pojo.Job;
+import java.util.List;
+
 /**
  *
  * @author nguye
  */
-public interface JobRepository {
-    
+public interface JobRepository{
+
+   List<Job> getAllJobs();
+   void addJob(Job job);
+   void editJobById(int id, Job updatedJob); 
+   void deleteJobById(int id); 
 }
