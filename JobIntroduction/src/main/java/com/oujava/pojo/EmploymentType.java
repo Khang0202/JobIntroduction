@@ -4,9 +4,8 @@
  */
 package com.oujava.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author trann
+ * @author nguye
  */
 @Entity
 @Table(name = "employment_type")
@@ -45,8 +44,7 @@ public class EmploymentType implements Serializable {
     @Column(name = "employment")
     private String employment;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employmentTypeId")
-    @JsonIgnore
-    private Collection<Job> jobCollection;
+    private Set<Job> jobSet;
 
     public EmploymentType() {
     }
@@ -72,12 +70,12 @@ public class EmploymentType implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Job> getJobCollection() {
-        return jobCollection;
+    public Set<Job> getJobSet() {
+        return jobSet;
     }
 
-    public void setJobCollection(Collection<Job> jobCollection) {
-        this.jobCollection = jobCollection;
+    public void setJobSet(Set<Job> jobSet) {
+        this.jobSet = jobSet;
     }
 
     @Override

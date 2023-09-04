@@ -5,8 +5,8 @@
 package com.oujava.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author trann
+ * @author nguye
  */
 @Entity
 @Table(name = "user")
@@ -42,6 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByImage", query = "SELECT u FROM User u WHERE u.image = :image"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone"),
+    @NamedQuery(name = "User.findBySex", query = "SELECT u FROM User u WHERE u.sex = :sex"),
+    @NamedQuery(name = "User.findByBirth", query = "SELECT u FROM User u WHERE u.birth = :birth"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
@@ -89,6 +91,16 @@ public class User implements Serializable {
     private String phone;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "sex")
+    private String sex;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "birth")
+    @Temporal(TemporalType.DATE)
+    private String birth;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "username")
     private String username;
@@ -103,8 +115,7 @@ public class User implements Serializable {
     @Column(name = "active")
     private Boolean active;
     @Column(name = "experience")
-    @Temporal(TemporalType.DATE)
-    private Date experience;
+    private Integer experience;
     @Size(max = 255)
     @Column(name = "filecv")
     private String filecv;
@@ -121,17 +132,17 @@ public class User implements Serializable {
     @Column(name = "urlinfo")
     private String urlinfo;
     @OneToMany(mappedBy = "candidateId")
-    private Collection<Apply> applyCollection;
+    private Set<Apply> applySet;
     @OneToMany(mappedBy = "employerId")
-    private Collection<Apply> applyCollection1;
+    private Set<Apply> applySet1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
-    private Collection<Skill> skillCollection;
+    private Set<Skill> skillSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employerId")
-    private Collection<Rating> ratingCollection;
+    private Set<Rating> ratingSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidateId")
-    private Collection<Rating> ratingCollection1;
+    private Set<Rating> ratingSet1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employerId")
-    private Collection<Job> jobCollection;
+    private Set<Job> jobSet;
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     @ManyToOne
     private Faculty facultyId;
@@ -146,13 +157,15 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstName, String lastName, String image, String email, String phone, String username, String password) {
+    public User(Integer id, String firstName, String lastName, String image, String email, String phone, String sex, String birth, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.image = image;
         this.email = email;
         this.phone = phone;
+        this.sex = sex;
+        this.birth = birth;
         this.username = username;
         this.password = password;
     }
@@ -205,6 +218,22 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -237,11 +266,11 @@ public class User implements Serializable {
         this.active = active;
     }
 
-    public Date getExperience() {
+    public Integer getExperience() {
         return experience;
     }
 
-    public void setExperience(Date experience) {
+    public void setExperience(Integer experience) {
         this.experience = experience;
     }
 
@@ -286,57 +315,57 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Apply> getApplyCollection() {
-        return applyCollection;
+    public Set<Apply> getApplySet() {
+        return applySet;
     }
 
-    public void setApplyCollection(Collection<Apply> applyCollection) {
-        this.applyCollection = applyCollection;
-    }
-
-    @XmlTransient
-    public Collection<Apply> getApplyCollection1() {
-        return applyCollection1;
-    }
-
-    public void setApplyCollection1(Collection<Apply> applyCollection1) {
-        this.applyCollection1 = applyCollection1;
+    public void setApplySet(Set<Apply> applySet) {
+        this.applySet = applySet;
     }
 
     @XmlTransient
-    public Collection<Skill> getSkillCollection() {
-        return skillCollection;
+    public Set<Apply> getApplySet1() {
+        return applySet1;
     }
 
-    public void setSkillCollection(Collection<Skill> skillCollection) {
-        this.skillCollection = skillCollection;
-    }
-
-    @XmlTransient
-    public Collection<Rating> getRatingCollection() {
-        return ratingCollection;
-    }
-
-    public void setRatingCollection(Collection<Rating> ratingCollection) {
-        this.ratingCollection = ratingCollection;
+    public void setApplySet1(Set<Apply> applySet1) {
+        this.applySet1 = applySet1;
     }
 
     @XmlTransient
-    public Collection<Rating> getRatingCollection1() {
-        return ratingCollection1;
+    public Set<Skill> getSkillSet() {
+        return skillSet;
     }
 
-    public void setRatingCollection1(Collection<Rating> ratingCollection1) {
-        this.ratingCollection1 = ratingCollection1;
+    public void setSkillSet(Set<Skill> skillSet) {
+        this.skillSet = skillSet;
     }
 
     @XmlTransient
-    public Collection<Job> getJobCollection() {
-        return jobCollection;
+    public Set<Rating> getRatingSet() {
+        return ratingSet;
     }
 
-    public void setJobCollection(Collection<Job> jobCollection) {
-        this.jobCollection = jobCollection;
+    public void setRatingSet(Set<Rating> ratingSet) {
+        this.ratingSet = ratingSet;
+    }
+
+    @XmlTransient
+    public Set<Rating> getRatingSet1() {
+        return ratingSet1;
+    }
+
+    public void setRatingSet1(Set<Rating> ratingSet1) {
+        this.ratingSet1 = ratingSet1;
+    }
+
+    @XmlTransient
+    public Set<Job> getJobSet() {
+        return jobSet;
+    }
+
+    public void setJobSet(Set<Job> jobSet) {
+        this.jobSet = jobSet;
     }
 
     public Faculty getFacultyId() {

@@ -74,7 +74,7 @@ public class JobRepositoryImpl implements JobRepository{
 
     @Override
     public void addJob(Job job) {
-         Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.getCurrentSession();
         session.persist(job);
     }
 
