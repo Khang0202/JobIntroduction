@@ -1,0 +1,13 @@
+-15/8/2023:
+	-Tạo database jobdb
+	-Xử lý các quan hệ của bảng 
+
+
+
+
+
+
+-9/4/2023
+	Update API: EmploymentType,Faculty,Job,Rating,Role,Skill
+	Bug: Chưa đăng nhập và đăng kí được
+	Fix: các lỗi Api: Job,Role,Skill
