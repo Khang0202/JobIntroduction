@@ -5,8 +5,6 @@
 package com.oujava.pojo;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -28,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author trann
+ * @author nguye
  */
 @Entity
 @Table(name = "job")
@@ -93,7 +91,7 @@ public class Job implements Serializable {
     @NotNull
     @Column(name = "date_posted")
     @Temporal(TemporalType.DATE)
-    private Date datePosted;
+    private String datePosted;
     @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EmploymentType employmentTypeId;
@@ -108,7 +106,7 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public Job(Integer id, String name, int salary, String company, String address, String phone, String emailcompany, Date datePosted) {
+    public Job(Integer id, String name, int salary, String company, String address, String phone, String emailcompany, String datePosted) {
         this.id = id;
         this.name = name;
         this.salary = salary;
@@ -191,11 +189,11 @@ public class Job implements Serializable {
         this.otherinfomation = otherinfomation;
     }
 
-    public Date getDatePosted() {
+    public String getDatePosted() {
         return datePosted;
     }
 
-    public void setDatePosted(Date datePosted) {
+    public void setDatePosted(String datePosted) {
         this.datePosted = datePosted;
     }
 
@@ -239,15 +237,5 @@ public class Job implements Serializable {
     public String toString() {
         return "com.oujava.pojo.Job[ id=" + id + " ]";
     }
-
-    public void setDatePosted(String currentDate) {
-    try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng ngày tháng của chuỗi
-        Date parsedDate = dateFormat.parse(currentDate);
-        this.datePosted = parsedDate;
-    } catch (ParseException e) {
-        // Xử lý ngoại lệ khi không thể chuyển đổi chuỗi thành ngày
-        e.printStackTrace();
-    }    }
     
 }

@@ -6,10 +6,6 @@ package com.oujava.DTO;
 
 import com.oujava.pojo.User;
 
-/**
- *
- * @author trann
- */
 public class RegisterDTO {
 
 

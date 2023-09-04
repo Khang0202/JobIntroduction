@@ -4,9 +4,8 @@
  */
 package com.oujava.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author trann
+ * @author nguye
  */
 @Entity
 @Table(name = "role")
@@ -48,11 +47,9 @@ public class Role implements Serializable {
     @Column(name = "role")
     private String role;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId")
-    @JsonIgnore
-    private Collection<RolePermission> rolePermissionCollection;
+    private Set<RolePermission> rolePermissionSet;
     @OneToMany(mappedBy = "roleId")
-    @JsonIgnore
-    private Collection<User> userCollection;
+    private Set<User> userSet;
 
     public Role() {
     }
@@ -83,21 +80,21 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public Collection<RolePermission> getRolePermissionCollection() {
-        return rolePermissionCollection;
+    public Set<RolePermission> getRolePermissionSet() {
+        return rolePermissionSet;
     }
 
-    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
-        this.rolePermissionCollection = rolePermissionCollection;
+    public void setRolePermissionSet(Set<RolePermission> rolePermissionSet) {
+        this.rolePermissionSet = rolePermissionSet;
     }
 
     @XmlTransient
-    public Collection<User> getUserCollection() {
-        return userCollection;
+    public Set<User> getUserSet() {
+        return userSet;
     }
 
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
+    public void setUserSet(Set<User> userSet) {
+        this.userSet = userSet;
     }
 
     @Override

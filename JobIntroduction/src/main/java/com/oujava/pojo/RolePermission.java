@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author trann
+ * @author nguye
  */
 @Entity
 @Table(name = "role_permission")
