@@ -6,6 +6,7 @@ package com.oujava.repository;
 
 import com.oujava.DTO.CandidateDTO;
 import com.oujava.DTO.CustomerDTO;
+import com.oujava.pojo.Permission;
 import com.oujava.pojo.User;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public interface UserRepository {
     List<User> getAllUsers(); 
-     
+    List<Permission> getAllPermissionById(int userId);
     void login(String username,String password);
     void registerCandidate(CandidateDTO candidate);
     void registerCustomer(CustomerDTO customer);

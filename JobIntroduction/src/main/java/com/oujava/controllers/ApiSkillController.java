@@ -4,8 +4,12 @@
  */
 package com.oujava.controllers;
 
+import com.mysql.cj.PerConnectionLRUFactory;
+import com.oujava.pojo.Permission;
 import com.oujava.pojo.Skill;
+import com.oujava.pojo.User;
 import com.oujava.service.SkillService;
+import com.oujava.service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +31,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiSkillController {
     @Autowired
     private SkillService skillService;
+    
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/add")
     public ResponseEntity<String> addSkill(@RequestBody Skill skill) {
@@ -45,6 +52,4 @@ public class ApiSkillController {
         skillService.getAllSkillByUserId(userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    
 }

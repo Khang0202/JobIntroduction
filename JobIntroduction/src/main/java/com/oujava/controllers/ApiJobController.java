@@ -39,12 +39,12 @@ public class ApiJobController {
 
     }
 
-    @PutMapping("/addJob")
-    @CrossOrigin
-    public ResponseEntity<String> addJob(@RequestBody Job job) {
-        this.jobService.addJob(job);
-        return new ResponseEntity<>("Add job success", HttpStatus.OK);
-    }
+//    @PutMapping("/addJob")
+//    @CrossOrigin
+//    public ResponseEntity<String> addJob(@RequestBody Job job) {
+//        this.jobService.addJob(job);
+//        return new ResponseEntity<>("Add job success", HttpStatus.OK);
+//    }
 
    @PutMapping("/editJob/{id}")
 public ResponseEntity<String> editJobById(@PathVariable int id, @RequestBody Job updatedJob) {

@@ -6,12 +6,13 @@ import com.oujava.pojo.Job;
 import com.oujava.pojo.Rating;
 import com.oujava.pojo.Role;
 import com.oujava.pojo.Skill;
+import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2023-09-05T00:55:03")
+@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2023-09-05T08:48:48")
 @StaticMetamodel(User.class)
 public class User_ { 
 
@@ -32,7 +33,7 @@ public class User_ {
     public static volatile SingularAttribute<User, Role> roleId;
     public static volatile SingularAttribute<User, String> sex;
     public static volatile SingularAttribute<User, String> filecv;
-    public static volatile SingularAttribute<User, String> birth;
+    public static volatile SingularAttribute<User, Date> birth;
     public static volatile SingularAttribute<User, Boolean> active;
     public static volatile SetAttribute<User, Rating> ratingSet1;
     public static volatile SingularAttribute<User, String> firstName;

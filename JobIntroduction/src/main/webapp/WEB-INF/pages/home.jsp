@@ -16,7 +16,7 @@
         <h1>Hello</h1>
         <ul>
             <c:forEach items="${faculty}" var="f">
-                <li>${f.id} - ${f.role}</li>
+                <li>${f.permission} - ${f.id}</li>
             </c:forEach>
         </ul>
     </body>
