@@ -5,6 +5,8 @@
 package com.oujava.controllers;
 
 
+import com.oujava.repository.impl.UserRepositoryImpl;
+import com.oujava.service.UserService;
 import javax.persistence.Query;
 import org.hibernate.Session;
 
@@ -29,9 +31,7 @@ public class HomeController {
     @RequestMapping("/")
     @Transactional
     public String index(Model model){
-        Session session = factory.getObject().getCurrentSession();
-        Query q = session.createQuery("from Role");
-        model.addAttribute("faculty", q.getResultList());
+//        model.addAttribute("faculty", userRepositoryImpl.getAllPermissionById(1));
         return "home";
         
     }

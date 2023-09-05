@@ -6,6 +6,7 @@ package com.oujava.service.impl;
 
 import com.oujava.DTO.CandidateDTO;
 import com.oujava.DTO.CustomerDTO;
+import com.oujava.pojo.Permission;
 import com.oujava.pojo.User;
 import com.oujava.repository.UserRepository;
 import com.oujava.service.UserService;
@@ -49,6 +50,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public void registerCustomer(CustomerDTO customer) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Permission> getAllPermissionById(int userId) {
+        return userRepo.getAllPermissionById(userId);
     }
 
 

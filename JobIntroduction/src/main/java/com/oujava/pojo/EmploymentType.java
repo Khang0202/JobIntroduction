@@ -4,6 +4,7 @@
  */
 package com.oujava.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -43,6 +44,7 @@ public class EmploymentType implements Serializable {
     @Size(max = 255)
     @Column(name = "employment")
     private String employment;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employmentTypeId")
     private Set<Job> jobSet;
 

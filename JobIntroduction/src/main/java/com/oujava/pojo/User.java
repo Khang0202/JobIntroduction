@@ -98,7 +98,7 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "birth")
     @Temporal(TemporalType.DATE)
-    private String birth;
+    private Date birth;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -157,7 +157,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstName, String lastName, String image, String email, String phone, String sex, String birth, String username, String password) {
+    public User(Integer id, String firstName, String lastName, String image, String email, String phone, String sex, Date birth, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -226,11 +226,11 @@ public class User implements Serializable {
         this.sex = sex;
     }
 
-    public String getBirth() {
+    public Date getBirth() {
         return birth;
     }
 
-    public void setBirth(String birth) {
+    public void setBirth(Date birth) {
         this.birth = birth;
     }
 

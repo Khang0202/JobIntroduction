@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class ApiEmploymentTypeController {
     
-@Autowired
+    @Autowired
     private EmploymentTypeService employmentTypeService;
 
     @GetMapping("/getAllEmploymentType")
@@ -42,13 +42,13 @@ public class ApiEmploymentTypeController {
         employmentTypeService.addEmType(employmentType);
     }
 
-    @PutMapping("editEmploymentTyoeById/{id}")
+    @PutMapping("/editEmploymentTyoeById/{id}")
     @CrossOrigin
     public void editEmploymentType(@PathVariable int id, @RequestBody String updatedEmploymentType) {
         employmentTypeService.editEmTypeById(id, updatedEmploymentType);
     }
 
-    @DeleteMapping("deleteEmTypeById/{id}")
+    @DeleteMapping("/deleteEmTypeById/{id}")
     @CrossOrigin
     public void deleteEmploymentType(@PathVariable int id) {
         employmentTypeService.deleteEmTypeById(id);

@@ -4,10 +4,11 @@
  */
 package com.oujava.service.impl;
 
-import static com.oujava.format.GetDate.getCurrentDate;
+import com.oujava.format.GetDate;
 import com.oujava.pojo.Job;
 import com.oujava.repository.JobRepository;
 import com.oujava.service.JobService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,7 @@ public class JobServiceImpl implements JobService{
     
     @Override
     public void addJob(Job job) {
-       String currentDate = getCurrentDate();
-        job.setDatePosted(currentDate);
+        job.setDatePosted(new Date());
         jobRepo.addJob(job);
     }
 

@@ -92,7 +92,7 @@ public class Job implements Serializable {
     @NotNull
     @Column(name = "date_posted")
     @Temporal(TemporalType.DATE)
-    private String datePosted;
+    private Date datePosted;
     @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EmploymentType employmentTypeId;
@@ -107,7 +107,7 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public Job(Integer id, String name, int salary, String company, String address, String phone, String emailcompany, String datePosted) {
+    public Job(Integer id, String name, int salary, String company, String address, String phone, String emailcompany, Date datePosted) {
         this.id = id;
         this.name = name;
         this.salary = salary;
@@ -190,11 +190,11 @@ public class Job implements Serializable {
         this.otherinfomation = otherinfomation;
     }
 
-    public String getDatePosted() {
+    public Date getDatePosted() {
         return datePosted;
     }
 
-    public void setDatePosted(String datePosted) {
+    public void setDatePosted(Date datePosted) {
         this.datePosted = datePosted;
     }
 

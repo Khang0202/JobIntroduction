@@ -44,22 +44,17 @@ public class UserRepositoryImpl implements UserRepository {
         CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
         Root rootUser = criteriaQuery.from(User.class);
         Root rootRole = criteriaQuery.from(Role.class);
-        Root rootPermission = criteriaQuery.from(Permission.class);
-        Root rootRolePermission = criteriaQuery.from(RolePermission.class);
 
         criteriaQuery.multiselect(
-                rootUser.get("first_name"),
-                rootUser.get("last_name"),
+                rootUser.get("firstName"),
+                rootUser.get("lastName"),
                 rootUser.get("email"),
                 rootUser.get("username"),
                 rootRole.get("role"),
-                rootPermission.get("permission"),
                 rootUser.get("active")
         );
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(criteriaBuilder.equal(rootUser.get("roleId"), rootRole.get("id")));
-        predicates.add(criteriaBuilder.equal(rootUser.get("roleId"), rootRolePermission.get("id")));
-        predicates.add(criteriaBuilder.equal(rootRolePermission.get("permissionId"), rootPermission.get("id")));
 
         criteriaQuery.where(predicates.toArray(Predicate[]::new));
 
@@ -109,6 +104,30 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void registerCustomer(CustomerDTO customer) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Permission> getAllPermissionById(int userId) {
+        Session session = this.sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
+        Root rootUser = criteriaQuery.from(User.class);
+        Root rootPermission = criteriaQuery.from(Permission.class);
+        Root rootRolePermission = criteriaQuery.from(RolePermission.class);
+
+        criteriaQuery.multiselect(
+                rootPermission.get("id"),
+                rootPermission.get("permission")
+        );
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(criteriaBuilder.equal(rootUser.get("id"), userId));
+        predicates.add(criteriaBuilder.equal(rootUser.get("roleId"), rootRolePermission.get("roleId")));
+        predicates.add(criteriaBuilder.equal(rootRolePermission.get("permissionId"), rootPermission.get("id")));
+
+        criteriaQuery.where(predicates.toArray(Predicate[]::new));
+
+        Query query = session.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 
     

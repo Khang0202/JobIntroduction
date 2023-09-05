@@ -3,14 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.oujava.format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 /**
  *
  * @author trann
  */
 public class GetDate {
-    public static String getCurrentDate() {
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static Date getDateFromString(String date) throws ParseException {
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
     }
 }
