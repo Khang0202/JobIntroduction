@@ -17,6 +17,7 @@ import java.util.List;
 public interface UserRepository {
     List<User> getAllUsers(); 
     List<Permission> getAllPermissionById(int userId);
+    User getUserByUsername(String username);
     void login(String username,String password);
     void registerCandidate(CandidateDTO candidate);
     void registerCustomer(CustomerDTO customer);

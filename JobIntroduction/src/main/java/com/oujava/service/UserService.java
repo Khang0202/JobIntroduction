@@ -18,7 +18,7 @@ public interface UserService {
     List<User> getAllUsers(); 
     List<Permission> getAllPermissionById(int userId);
     void editRoleByUserId(int userId, int roleId); 
-
+    User getUserByUsername(String username);
     void editActiveByUserId(int userId, boolean active); 
     void login(String username,String password);
     void registerCandidate(CandidateDTO candidate);
