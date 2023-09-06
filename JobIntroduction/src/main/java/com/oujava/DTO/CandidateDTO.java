@@ -5,6 +5,7 @@
 package com.oujava.DTO;
 
 import com.oujava.pojo.Role;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +23,7 @@ public class CandidateDTO {
     private String phone;
     private String username;
     private String password;
-    private String birth;
+    private Date birth;
     private String sex;
     private Role roleId;
     private String address;
@@ -34,7 +35,7 @@ public class CandidateDTO {
     private String urlinfo;
     
     public CandidateDTO (String firstname, String lastname, String image, String email, String phone, String username, String password,
-            String birth, String sex, Role roleId, String address, int experience, String filecv, String currentposition, 
+            Date birth, String sex, Role roleId, String address, int experience, String filecv, String currentposition, 
             String education, String country, String urlinfo) {
         this.firstname = firstname;
         this.lastname = lastname;

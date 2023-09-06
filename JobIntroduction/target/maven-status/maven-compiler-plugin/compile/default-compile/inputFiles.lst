@@ -33,6 +33,7 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\DTO\CustomerDT
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Skill.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Apply.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\RatingRepositoryImpl.java
+D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\filters\CustomAccessDeniedHandler.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\HomeController.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\RatingServiceImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\JobRepositoryImpl.java
@@ -43,9 +44,11 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\configs\WebApp
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\FacultyServiceImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\JobRepository.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\ApiRoleController.java
+D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\components\JwtService.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\configs\HibernateConfig.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\EmploymentTypeRepositoryImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\SkillServiceImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\ApiSkillController.java
+D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\filters\JwtAuthenticationTokenFilter.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\RoleRepositoryImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Permission.java
