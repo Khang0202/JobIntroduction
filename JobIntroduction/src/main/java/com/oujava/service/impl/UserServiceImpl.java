@@ -4,8 +4,7 @@
  */
 package com.oujava.service.impl;
 
-import com.oujava.DTO.CandidateDTO;
-import com.oujava.DTO.CustomerDTO;
+
 import com.oujava.pojo.Permission;
 import com.oujava.pojo.User;
 import com.oujava.repository.UserRepository;
@@ -38,18 +37,19 @@ public class UserServiceImpl implements UserService{
         userRepo.editActiveByUserId(userId, active);
     }
 
+     @Override
+    public User login(String usernameOrEmail, String password) {
+        return userRepo.login(usernameOrEmail, password);
+}
+
     @Override
-    public void login(String username, String password) {
+    public void registerCandidate(User user) {
+        userRepo.registerCandidate(user);
     }
 
     @Override
-    public void registerCandidate(CandidateDTO candidate) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void registerCustomer(CustomerDTO customer) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void registerCustomer(User user) {
+        userRepo.registerCustomer(user);
     }
 
     @Override

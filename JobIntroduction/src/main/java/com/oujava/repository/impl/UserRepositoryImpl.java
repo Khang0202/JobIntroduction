@@ -4,10 +4,7 @@
  */
 package com.oujava.repository.impl;
 
-import com.oujava.DTO.CandidateDTO;
-import com.oujava.DTO.CustomerDTO;
-import com.oujava.pojo.EmploymentType;
-import com.oujava.pojo.Job;
+
 import com.oujava.pojo.Permission;
 import com.oujava.pojo.Role;
 import com.oujava.pojo.RolePermission;
@@ -15,6 +12,7 @@ import com.oujava.pojo.User;
 import com.oujava.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -90,20 +88,44 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
+     @Override
+    public User login(String usernameOrEmail, String password) {
+    Session session = sessionFactory.getCurrentSession();
+    User user = null;
+
+    Query query = session.createQuery("FROM User WHERE username = :input OR email = :input", User.class);
+    query.setParameter("input", usernameOrEmail);
+    try {
+        user = (User) query.getSingleResult();
+    } catch (NoResultException e) {    
+        return null; 
+    }
+    
+    if (user != null && user.getPassword().equals(password)) {
+        return user; 
+    } else {
+        return null; 
+    }
+}
+
+
     @Override
-    public void login(String username, String password) {
+    public void registerCandidate(User user) {
         Session session = sessionFactory.getCurrentSession();
-
+        Role candidateRole = new Role();
+        candidateRole.setId(2);
+        user.setRoleId(candidateRole);
+        session.persist(user);
+        
     }
 
     @Override
-    public void registerCandidate(CandidateDTO candidate) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void registerCustomer(CustomerDTO customer) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void registerCustomer(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        Role candidateRole = new Role();
+        candidateRole.setId(1);
+        user.setRoleId(candidateRole);
+        session.persist(user);
     }
 
     @Override
