@@ -117,7 +117,7 @@ CREATE TABLE `job` (
   KEY `fk_job_employment_type_idx` (`employment_type_id`),
   CONSTRAINT `fk_job_employment_type` FOREIGN KEY (`employment_type_id`) REFERENCES `employment_type` (`id`),
   CONSTRAINT `fk_work_user` FOREIGN KEY (`employer_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +126,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
+INSERT INTO `job` VALUES (1,1,'a',1,5000000,NULL,'Cty TNHH chode','123 chuong cho','0123456987','chuongcho@123.com',NULL,'2023-09-05');
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +204,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'admin'),(2,'candidate'),(3,'employer');
+INSERT INTO `role` VALUES (1,'admin'),(2,'candidate'),(3,'customer');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,7 +248,7 @@ CREATE TABLE `skill` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userid` int NOT NULL,
   `skill` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`,`userid`),
+  PRIMARY KEY (`id`),
   KEY `fk_skill_user_idx` (`userid`),
   CONSTRAINT `fk_skill_user` FOREIGN KEY (`userid`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -276,13 +277,15 @@ CREATE TABLE `user` (
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `sex` varchar(5) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `birth` date NOT NULL,
   `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `role_id` int DEFAULT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `active` bit(1) DEFAULT b'1',
   `faculty_id` int DEFAULT NULL,
-  `experience` year DEFAULT NULL,
+  `experience` int DEFAULT NULL,
   `filecv` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `curentposition` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `education` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
@@ -293,7 +296,7 @@ CREATE TABLE `user` (
   KEY `fk_user_faculty_idx` (`faculty_id`),
   CONSTRAINT `fk_user_faculty` FOREIGN KEY (`faculty_id`) REFERENCES `faculty` (`id`),
   CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,6 +305,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Khang','Nguyễn','link','nguyenmanhkhang2002@gmail.com','0123456789','Nam','2002-02-02','Khang0202','012Khang012',1,NULL,_binary '',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -314,4 +318,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-26 22:49:50
+-- Dump completed on 2023-09-06  8:42:16

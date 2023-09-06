@@ -10,12 +10,14 @@ com\oujava\controllers\ApiRatingController.class
 com\oujava\service\RatingService.class
 com\oujava\controllers\ApiRoleController.class
 com\oujava\pojo\EmploymentType_.class
+com\oujava\components\JwtService.class
 com\oujava\controllers\ApiJobController.class
 com\oujava\DTO\CandidateDTO.class
 com\oujava\pojo\Apply.class
 com\oujava\pojo\Role.class
 com\oujava\configs\HibernateConfig.class
 com\oujava\pojo\Permission_.class
+com\oujava\filters\JwtAuthenticationTokenFilter.class
 com\oujava\configs\DispatcherServletInit.class
 com\oujava\repository\impl\UserRepositoryImpl.class
 com\oujava\controllers\ApiFacultyController.class
@@ -23,6 +25,7 @@ com\oujava\service\impl\RoleServiceImpl.class
 com\oujava\repository\EmploymentTypeRepository.class
 com\oujava\service\FacultyService.class
 com\oujava\repository\impl\FacultyRepositoryImpl.class
+com\oujava\filters\CustomAccessDeniedHandler.class
 com\oujava\repository\impl\EmploymentTypeRepositoryImpl.class
 com\oujava\pojo\Rating.class
 com\oujava\repository\JobRepository.class

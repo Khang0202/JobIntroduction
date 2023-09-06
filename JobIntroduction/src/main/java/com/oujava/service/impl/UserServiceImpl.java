@@ -57,6 +57,11 @@ public class UserServiceImpl implements UserService{
         return userRepo.getAllPermissionById(userId);
     }
 
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepo.getUserByUsername(username);
+    }
+
 
     
     
