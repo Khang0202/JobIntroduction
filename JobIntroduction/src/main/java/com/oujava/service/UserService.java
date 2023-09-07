@@ -23,7 +23,7 @@ public interface UserService {
     void editActiveByUserId(int userId, boolean active); 
     User login(String username,String password);
     
-    User register(Map<String, String> params, MultipartFile avatar);
+//    User register(Map<String, String> params, MultipartFile avatar);
     
     void registerCandidate(User user);
     void registerCustomer(User user);

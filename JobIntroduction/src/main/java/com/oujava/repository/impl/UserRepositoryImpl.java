@@ -37,8 +37,8 @@ public class UserRepositoryImpl implements UserRepository {
     private SessionFactory sessionFactory;
     @Autowired
     private LocalSessionFactoryBean factory;
-    @Autowired
-    private BCryptPasswordEncoder passEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder passEncoder;
 
     @Override
     public List<User> getAllUsers() {

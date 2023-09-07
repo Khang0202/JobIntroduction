@@ -6,32 +6,52 @@ package com.oujava.controllers;
 
 
 import com.oujava.repository.impl.UserRepositoryImpl;
+import com.oujava.service.EmploymentTypeService;
+import com.oujava.service.JobService;
 import com.oujava.service.UserService;
+import java.util.Map;
+import javax.persistence.Embeddable;
 import javax.persistence.Query;
+import org.eclipse.persistence.annotations.Properties;
 import org.hibernate.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author nguye
  */
 @Controller
+@PropertySource("classpath:configs.properties")
 public class HomeController {
     
-    
-    @Autowired
+//    @Autowired
     private LocalSessionFactoryBean factory;
+    @Autowired
+    private EmploymentTypeService employmentTypeService;
+    @Autowired
+    private JobService jobService;
+    @Autowired
+    private Environment env;
     
     @RequestMapping("/")
     @Transactional
-    public String index(Model model){
-//        model.addAttribute("faculty", userRepositoryImpl.getAllPermissionById(1));
+    public String index(Model model, @RequestParam Map<String, String> params){
+//        model.addAttribute("faculty", userRepositoryImpl.getAllPermissionByUserId(1));
+        model.addAttribute("em", employmentTypeService.getAllEmType());
+        model.addAttribute("job",jobService.getJobs(params));
+        
+        int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
+        Long count = jobService.countJob();
+        model.addAttribute("counter", Math.ceil(count*1.0/pageSize));
         return "home";
         
     }

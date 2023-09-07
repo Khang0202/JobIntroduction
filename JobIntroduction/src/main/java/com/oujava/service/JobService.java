@@ -6,6 +6,7 @@ package com.oujava.service;
 
 import com.oujava.pojo.Job;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +15,8 @@ import java.util.List;
 public interface JobService {
 
     List<Job> getAllJobs();
+    Long countJob();
+    List<Job> getJobs(Map<String, String> params);
 
     void addJob(Job job);
 

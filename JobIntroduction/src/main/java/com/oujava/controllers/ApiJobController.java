@@ -36,7 +36,6 @@ public class ApiJobController {
     public ResponseEntity<List<Job>> listJobs() {
         List<Job> job = this.jobService.getAllJobs();
         return new ResponseEntity<>(job, HttpStatus.OK);
-
     }
 
 //    @PutMapping("/addJob")

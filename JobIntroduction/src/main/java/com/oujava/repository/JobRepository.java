@@ -6,6 +6,7 @@ package com.oujava.repository;
 
 import com.oujava.pojo.Job;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,7 +15,10 @@ import java.util.List;
 public interface JobRepository{
 
    List<Job> getAllJobs();
+   Long countJob();
+   List<Job> getJobs(Map<String, String> params);
    void addJob(Job job);
    void editJobById(int id, Job updatedJob); 
    void deleteJobById(int id); 
+   
 }
