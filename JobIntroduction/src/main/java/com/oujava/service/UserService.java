@@ -4,25 +4,29 @@
  */
 package com.oujava.service;
 
-import com.oujava.DTO.CandidateDTO;
-import com.oujava.DTO.CustomerDTO;
 import com.oujava.pojo.Permission;
+import com.oujava.pojo.Role;
 import com.oujava.pojo.User;
 import java.util.List;
+import java.util.Map;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author trann
  */
 public interface UserService {
-    List<User> getAllUsers(); 
-    List<Permission> getAllPermissionById(int userId);
+    List<User> getAllUsers();
+    List<Permission> getAllPermissionByUserId(int userId);
     void editRoleByUserId(int userId, int roleId); 
     User getUserByUsername(String username);
     void editActiveByUserId(int userId, boolean active); 
-    void login(String username,String password);
-    void registerCandidate(CandidateDTO candidate);
-    void registerCustomer(CustomerDTO customer);
-
+    User login(String username,String password);
+    
+    User register(Map<String, String> params, MultipartFile avatar);
+    
+    void registerCandidate(User user);
+    void registerCustomer(User user);
+    Role getUserRoleByUserId(int id);
     
 }

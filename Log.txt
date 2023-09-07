@@ -1,16 +1,75 @@
--15/8/2023:
+-12/8/2023:
 	-Tạo database jobdb
 	-Xử lý các quan hệ của bảng
-
-
-
-
-
-
-
--9/4/2023
-	Update API: EmploymentType,Faculty,Job,Rating,Role,Skill
-	Bug: Chưa đăng nhập và đăng kí được
-	Fix: các lỗi Api: Job,Role,Skill
--9/5/2023
-	Fix: Sửa lỗi trả về
+-13/8/2023
+	thêm bảng EmploymentType, sửa lại bảng đổi tên work thành job
+	thêm bảng Faculty(khoa của ứng viên)
+	thêm bảng Skill(mỗi ứng viên có có thể nhiều kỹ năng)
+-14/8/2023
+	Thêm bảng apply lưu thông tin ứng viên apply đến nhà tuyển dụng
+	Lập ra các vấn đề cần xử lý là các api cần có
+-17/8/2023
+	Thêm bảng rating để thực hiện yêu cầu ứng viên có thể đánh giá nhà tuyển dụng
+	Thêm sơ lược vài dòng dữ liệu để test
+	Tạo pojo, hibernate kết nối với database
+-20/8/2023
+	chạy thử truy xuất từ database
+	thêm các class repository từ pojo
+	Thêm các funtion trong EmploymentTyperepository
+	chạy thử api EmploymentTyperepository
+-21/8/2023
+	fix lỗi trả về của api EmploymentTyperepository
+	tạo các api faculty
+	fix lỗi trả về các api faculty
+	Đổi kiểu dữ liệu của createddate thành string
+	dư định truyền vào string và database có thể hiểu được ngày
+	lỗi không xác định
+-24/8/2023
+	lỗi không xác định, không truy xuất được database
+	thêm các api skill
+	sửa lỗi lúc tạo bảng skill trong database(có 2 khóa chính)
+	thêm phương thức fomat, định dạng ngày hiện tại là string
+	thêm api user
+	lỗi không truy xuất được database
+-27/8/2023
+	xóa tất cả pojo sau đó tạo lại theo database mới sau khi sửa bảng skill
+	lỗi truy xuất database
+	thử đổi về Date -> thành công truy xuất database
+	tìm hiểu làm sao truyền vào database ngày
+-28/8/2023
+	Thêm api listjob, editjob, deljob
+	chạy thử api addjob lỗi 404
+	chạy thử các api khác, có lỗi, có không
+-29/8/2023
+	chạy thử login, register
+	dự định thêm DTO phân class user thành candinate và employer
+	lỗi mapping DTO
+	lỗi 404 login, register
+-30/8/2023
+	xóa các class DTO
+	tìm cách xử lý phân tách user phân biệt được candinate và employer
+-31/8/2023
+	Add react project
+	add jwt
+	add spring security theo project của thầy
+	thêm package filters
+	lỗi lỗi import được jwt
+	lỗi không import được servlet
+-2/9/2023
+	cập nhật các api EmploymentType,Faculty,Job,Rating,Role,Skill
+	lỗi chưa đăng nhập và đăng kí được
+	sửa các lỗi api Job,Role,Skill
+-3/9/2023
+	sửa lỗi trả về của api
+	add funtion getpermissionby id để xử lý spring secutiry
+	Tìm hiểu JwtAuthenticationTokenFilter dùng để làm gì
+	thử tự chỉnh UsernamePasswordAuthenticationFilter, lỗi
+	merge nhầm nhánh git, mất project, cần khóa repository push lên lại
+-4/9/2023
+	lỗi login không lấy được json đầu vào
+	thử mã hóa mật khẩu
+	thêm sơ các giao diện cơ bản
+-5/9/2023
+	thử lại jwt, lở create gì đó ở class nào đó không biết
+	không tìm được đã lở làm gì
+	sửa lỗi login, register không lấy được đầu vào
