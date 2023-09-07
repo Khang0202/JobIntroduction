@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j"),
+    @NamedQuery(name = "Job.countAll", query = "SELECT count(*) FROM Job"),
     @NamedQuery(name = "Job.findById", query = "SELECT j FROM Job j WHERE j.id = :id"),
     @NamedQuery(name = "Job.findByName", query = "SELECT j FROM Job j WHERE j.name = :name"),
     @NamedQuery(name = "Job.findBySalary", query = "SELECT j FROM Job j WHERE j.salary = :salary"),
@@ -45,6 +47,33 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Job.findByDatePosted", query = "SELECT j FROM Job j WHERE j.datePosted = :datePosted")})
 public class Job implements Serializable {
 
+    /**
+     * @return the employmentType
+     */
+    public String getEmploymentType() {
+        return employmentType;
+    }
+
+    /**
+     * @param employmentType the employmentType to set
+     */
+    public void setEmploymentType(String employmentType) {
+        this.employmentType = employmentType;
+    }
+
+    /**
+     * @return the posterName
+     */
+    public String getPosterName() {
+        return posterName;
+    }
+
+    /**
+     * @param posterName the posterName to set
+     */
+    public void setPosterName(String posterName) {
+        this.posterName = posterName;
+    }
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -95,16 +124,38 @@ public class Job implements Serializable {
     private Date datePosted;
     @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private EmploymentType employmentTypeId;
     @JoinColumn(name = "employer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private User employerId;
+
+    @Transient
+    private String posterName;
+    @Transient
+    private String employmentType;
 
     public Job() {
     }
 
     public Job(Integer id) {
         this.id = id;
+    }
+
+    public Job(Integer id, String firstName, String name, String employment, int salary, String description, String company, String address, String phone, String emailcompany, String otherinfomation, Date datePosted) {
+        this.id = id;
+        this.posterName = firstName;
+        this.name = name;
+        this.employmentType = employment;
+        this.salary = salary;
+        this.description = description;
+        this.company = company;
+        this.address = address;
+        this.phone = phone;
+        this.emailcompany = emailcompany;
+        this.otherinfomation = otherinfomation;
+        this.datePosted = datePosted;
     }
 
     public Job(Integer id, String name, int salary, String company, String address, String phone, String emailcompany, Date datePosted) {
@@ -238,5 +289,5 @@ public class Job implements Serializable {
     public String toString() {
         return "com.oujava.pojo.Job[ id=" + id + " ]";
     }
-    
+
 }

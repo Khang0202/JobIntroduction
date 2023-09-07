@@ -35,8 +35,8 @@ public class UserServiceImpl implements UserService{
     
     private Cloudinary cloudinary;
     
-    @Autowired
-    private BCryptPasswordEncoder passEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder passEncoder;
     
     @Override
     public List<User> getAllUsers() {
@@ -84,31 +84,31 @@ public class UserServiceImpl implements UserService{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public User register(Map<String, String> params, MultipartFile avatar) {
-        User u = new User();
-        u.setFirstName(params.get("firstName"));
-        u.setLastName(params.get("lastName"));
-        u.setPhone(params.get("phone"));
-        u.setEmail(params.get("email"));
-        u.setUsername(params.get("username"));
-        u.setPassword(this.passEncoder.encode(params.get("password")));
-        try {
-            u.setBirth(GetDate.getDateFromString(params.get("birth")));
-        } catch (ParseException ex) {
-            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        u.setSex(params.get("sex"));
-        u.setRoleId(new Role(Integer.valueOf( params.get("roleId"))));
-        if (!avatar.isEmpty()) {
-                try {
-                    Map res = this.cloudinary.uploader().upload(avatar.getBytes(), 
-                            ObjectUtils.asMap("resource_type", "auto"));
-                    u.setImage(res.get("secure_url").toString());
-                } catch (IOException ex) {
-                    Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        return null;
-    }
+//    @Override
+//    public User register(Map<String, String> params, MultipartFile avatar) {
+//        User u = new User();
+//        u.setFirstName(params.get("firstName"));
+//        u.setLastName(params.get("lastName"));
+//        u.setPhone(params.get("phone"));
+//        u.setEmail(params.get("email"));
+//        u.setUsername(params.get("username"));
+//        u.setPassword(this.passEncoder.encode(params.get("password")));
+//        try {
+//            u.setBirth(GetDate.getDateFromString(params.get("birth")));
+//        } catch (ParseException ex) {
+//            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        u.setSex(params.get("sex"));
+//        u.setRoleId(new Role(Integer.valueOf( params.get("roleId"))));
+//        if (!avatar.isEmpty()) {
+//                try {
+//                    Map res = this.cloudinary.uploader().upload(avatar.getBytes(), 
+//                            ObjectUtils.asMap("resource_type", "auto"));
+//                    u.setImage(res.get("secure_url").toString());
+//                } catch (IOException ex) {
+//                    Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        return null;
+//    }
 }

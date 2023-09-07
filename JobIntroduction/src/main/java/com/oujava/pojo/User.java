@@ -168,6 +168,7 @@ public class User implements Serializable {
     
     @Transient
     private File fileImage;
+    
 
     public User() {
     }
