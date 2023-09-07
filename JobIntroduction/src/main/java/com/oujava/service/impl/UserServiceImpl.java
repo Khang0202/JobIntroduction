@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService{
     private Cloudinary cloudinary;
     
 //    @Autowired
-//    private BCryptPasswordEncoder passEncoder;
+    //    private BCryptPasswordEncoder passEncoder;
     
     @Override
     public List<User> getAllUsers() {

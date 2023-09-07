@@ -33,8 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @PropertySource("classpath:configs.properties")
 public class HomeController {
     
-//    @Autowired
-    private LocalSessionFactoryBean factory;
     @Autowired
     private EmploymentTypeService employmentTypeService;
     @Autowired
@@ -45,7 +43,6 @@ public class HomeController {
     @RequestMapping("/")
     @Transactional
     public String index(Model model, @RequestParam Map<String, String> params){
-//        model.addAttribute("faculty", userRepositoryImpl.getAllPermissionByUserId(1));
         model.addAttribute("em", employmentTypeService.getAllEmType());
         model.addAttribute("job",jobService.getJobs(params));
         

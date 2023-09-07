@@ -53,6 +53,7 @@ com\oujava\pojo\Skill.class
 com\oujava\repository\RoleRepository.class
 com\oujava\pojo\Job_.class
 com\oujava\pojo\User_.class
+com\oujava\configs\TilesConfigs.class
 com\oujava\controllers\ApiEmploymentTypeController.class
 com\oujava\format\GetRole.class
 com\oujava\repository\FacultyRepository.class
