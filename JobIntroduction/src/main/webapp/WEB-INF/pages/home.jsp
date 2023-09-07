@@ -19,12 +19,12 @@
         <nav>
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Job Introduction</a>
+                    <a class="navbar-brand" href="${action}">Job Introduction</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav me-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="${action}">Home</a>
                             </li>
@@ -37,12 +37,18 @@
                                 </li>
                             </c:forEach>
                         </ul>
+                                <form class="d-flex mt-3" action="${action}" >
+                            <input class="form-control me-2" type="text" name="key" placeholder="Nhập từ khóa...">
+                            <button class="btn btn-primary" type="submit">Tìm</button>
+                        </form>
                     </div>
                 </div>
             </nav>
         </nav>
 
         <div class="container mt-4">
+            <h1 class="text-center mt-1">DANH SÁCH TIN TUYỂN DỤNG</h1>
+            <a href="<c:url value="/job" />" class="btn btn-info mb-3">Thêm tin tuyển dụng</a>
             <c:if test="${counter > 1}">
                 <ul class="pagination mt-1">
                     <li class="page-item"><a class="page-link" href="<c:url value="/" />">Tất cả</a></li>
