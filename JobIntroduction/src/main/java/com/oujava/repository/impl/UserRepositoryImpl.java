@@ -4,10 +4,6 @@
  */
 package com.oujava.repository.impl;
 
-import com.oujava.DTO.CandidateDTO;
-import com.oujava.DTO.CustomerDTO;
-import com.oujava.pojo.EmploymentType;
-import com.oujava.pojo.Job;
 import com.oujava.pojo.Permission;
 import com.oujava.pojo.Role;
 import com.oujava.pojo.RolePermission;
@@ -15,6 +11,7 @@ import com.oujava.pojo.User;
 import com.oujava.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -23,6 +20,8 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +35,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
+    @Autowired
+    private LocalSessionFactoryBean factory;
+    @Autowired
+    private BCryptPasswordEncoder passEncoder;
 
     @Override
     public List<User> getAllUsers() {
@@ -91,23 +94,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void login(String username, String password) {
-        Session session = sessionFactory.getCurrentSession();
-
-    }
-
-    @Override
-    public void registerCandidate(CandidateDTO candidate) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void registerCustomer(CustomerDTO customer) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<Permission> getAllPermissionById(int userId) {
+    public List<Permission> getAllPermissionByUserId(int userId) {
         Session session = this.sessionFactory.getCurrentSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
@@ -135,8 +122,62 @@ public class UserRepositoryImpl implements UserRepository {
         Session s = this.sessionFactory.getCurrentSession();
         Query q = s.createQuery("FROM User WHERE username=:un");
         q.setParameter("un", username);
-
         return (User) q.getSingleResult();
+    }
+
+    @Override
+    public Role getUserRoleByUserId(int id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Role> criteriaQuery = criteriaBuilder.createQuery(Role.class);
+        Root rootUser = criteriaQuery.from(User.class);
+        Root rootRole = criteriaQuery.from(Role.class);
+        criteriaQuery.multiselect(
+                rootRole.get("id"),
+                rootRole.get("role")
+        );
+        criteriaQuery.where(criteriaBuilder.equal(rootUser.get("roleId"), rootRole.get("id")));
+        Query query = session.createQuery(criteriaQuery);
+        return (Role) query.getSingleResult();
+    }
+
+    @Override
+    public User login(String usernameOrEmail, String password) {
+    Session session = sessionFactory.getCurrentSession();
+    User user = null;
+
+    Query query = session.createQuery("FROM User WHERE username = :input OR email = :input", User.class);
+    query.setParameter("input", usernameOrEmail);
+    try {
+        user = (User) query.getSingleResult();
+    } catch (NoResultException e) {    
+        return null; 
+    }
+
+    if (user != null && user.getPassword().equals(password)) {
+        return user; 
+    } else {
+        return null; 
+    }
+}
+
+    @Override
+    public void registerCandidate(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void registerCustomer(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
+    //add user của thầy
+    @Override
+    public User register(User user) {
+        Session s = this.factory.getObject().getCurrentSession();
+        s.save(user);
+        return user;
     }
 
     

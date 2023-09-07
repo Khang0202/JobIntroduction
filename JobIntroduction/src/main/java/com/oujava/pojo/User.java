@@ -4,6 +4,7 @@
  */
 package com.oujava.pojo;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -22,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -55,6 +57,20 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByCountry", query = "SELECT u FROM User u WHERE u.country = :country"),
     @NamedQuery(name = "User.findByUrlinfo", query = "SELECT u FROM User u WHERE u.urlinfo = :urlinfo")})
 public class User implements Serializable {
+
+    /**
+     * @return the fileImage
+     */
+    public File getFileImage() {
+        return fileImage;
+    }
+
+    /**
+     * @param fileImage the fileImage to set
+     */
+    public void setFileImage(File fileImage) {
+        this.fileImage = fileImage;
+    }
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -149,6 +165,9 @@ public class User implements Serializable {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
     private Role roleId;
+    
+    @Transient
+    private File fileImage;
 
     public User() {
     }

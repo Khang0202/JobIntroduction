@@ -5,9 +5,13 @@
 package com.oujava.controllers;
 
 import com.oujava.pojo.EmploymentType;
+import com.oujava.pojo.User;
 import com.oujava.service.EmploymentTypeService;
+import com.oujava.service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +28,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/employmentTypes")
-
 public class ApiEmploymentTypeController {
     
     @Autowired
     private EmploymentTypeService employmentTypeService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/getAllEmploymentType")
     @CrossOrigin
@@ -52,5 +57,18 @@ public class ApiEmploymentTypeController {
     @CrossOrigin
     public void deleteEmploymentType(@PathVariable int id) {
         employmentTypeService.deleteEmTypeById(id);
+    }
+    
+    @PostMapping("/login")
+    @CrossOrigin
+    public ResponseEntity<String> login(String input, String password) {
+
+        User user = userService.login(input, password);
+
+        if (user != null) {
+            return new ResponseEntity<>("Đăng nhập thành công", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Đăng nhập thất bại", HttpStatus.UNAUTHORIZED);
+        }
     }
 }
