@@ -6,18 +6,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:url value="/" var="action" />
 <!DOCTYPE html>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="${action}">Job Introduction</a>
+        <a class="navbar-brand" href="${action}?page=1">Job Introduction</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="${action}">Home</a>
+                    <a class="nav-link" href="${action}?page=1">Home</a>
                 </li>
                 <c:forEach items="${em}" var="e">
                     <c:url value="/" var="searchUrl">

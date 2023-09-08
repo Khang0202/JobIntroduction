@@ -7,6 +7,7 @@ package com.oujava.controllers;
 import com.oujava.pojo.Role;
 import com.oujava.service.RoleService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,10 @@ public class ApiRoleController {
 
     @GetMapping("/rolelist")
     @CrossOrigin
-    public ResponseEntity<List<Role>> listRole() {
+    public ResponseEntity<List<Role>> listRole(Map<String, String> params) {
+        String userId = params.get("userId");
         try {
-            return new ResponseEntity<>(this.roleService.getAllRole(), HttpStatus.OK);
+            return new ResponseEntity<>(this.roleService.getAllRole(params), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

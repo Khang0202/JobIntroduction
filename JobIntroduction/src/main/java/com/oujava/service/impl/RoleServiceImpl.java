@@ -8,6 +8,7 @@ import com.oujava.pojo.Role;
 import com.oujava.repository.RoleRepository;
 import com.oujava.service.RoleService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,8 @@ public class RoleServiceImpl implements RoleService{
     
     
     @Override
-    public List<Role> getAllRole() {
-        return this.roleRepo.getAllRole();
+    public List<Role> getAllRole(Map<String, String> params) {
+        return this.roleRepo.getAllRole(params);
     }
     
 }
