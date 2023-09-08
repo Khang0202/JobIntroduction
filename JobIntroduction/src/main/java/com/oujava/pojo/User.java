@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -59,18 +60,22 @@ import javax.xml.bind.annotation.XmlTransient;
 public class User implements Serializable {
 
     /**
-     * @return the fileImage
+     * @return the file
      */
-    public File getFileImage() {
-        return fileImage;
+    public MultipartFile getFile() {
+        return file;
     }
 
     /**
-     * @param fileImage the fileImage to set
+     * @param file the file to set
      */
-    public void setFileImage(File fileImage) {
-        this.fileImage = fileImage;
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
+
+    /**
+     * @return the fileImage
+     */
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -167,7 +172,7 @@ public class User implements Serializable {
     private Role roleId;
     
     @Transient
-    private File fileImage;
+    private MultipartFile file;
     
 
     public User() {
