@@ -4,6 +4,7 @@
  */
 package com.oujava.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -34,6 +36,20 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Rating.findByStar", query = "SELECT r FROM Rating r WHERE r.star = :star")})
 public class Rating implements Serializable {
 
+    /**
+     * @return the poster
+     */
+    public String getPoster() {
+        return poster;
+    }
+
+    /**
+     * @param poster the poster to set
+     */
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,11 +65,15 @@ public class Rating implements Serializable {
     @Column(name = "comment")
     private String comment;
     @JoinColumn(name = "employer_id", referencedColumnName = "id")
+    @JsonIgnore
     @ManyToOne(optional = false)
     private User employerId;
     @JoinColumn(name = "candidate_id", referencedColumnName = "id")
+    @JsonIgnore
     @ManyToOne(optional = false)
     private User candidateId;
+    @Transient
+    private String poster;
 
     public Rating() {
     }

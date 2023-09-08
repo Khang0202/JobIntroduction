@@ -179,6 +179,10 @@ public class JobRepositoryImpl implements JobRepository{
                 query.setFirstResult((p - 1) * pageSize);
             }
         }
-        return query.getResultList();
+        List<Job> jobs = query.getResultList();
+        for (Job j : jobs) {
+            j.setPosterName(j.getEmployerId().getFirstName());
+        }
+        return jobs;
     }
 }

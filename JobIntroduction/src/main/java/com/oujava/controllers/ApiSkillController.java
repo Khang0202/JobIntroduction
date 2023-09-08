@@ -3,11 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.oujava.controllers;
-
-import com.mysql.cj.PerConnectionLRUFactory;
-import com.oujava.pojo.Permission;
 import com.oujava.pojo.Skill;
-import com.oujava.pojo.User;
 import com.oujava.service.SkillService;
 import com.oujava.service.UserService;
 import java.util.List;

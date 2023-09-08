@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,19 +32,41 @@ public class ApiFacultyController {
     @GetMapping("/getAllFaculty")
     @CrossOrigin
     public ResponseEntity<List<Faculty>> listFacultys() {
-        List<Faculty> facultys = facultyService.getAllFacultys();
-        return new ResponseEntity<>(facultys, HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(facultyService.getAllFacultys(),HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    @PutMapping("/editFacultyById/{id}")
+    
+    @PostMapping("/addOrUpdateFaculty")
     @CrossOrigin
-    public ResponseEntity<String> editFacultyById(@PathVariable int id, @RequestBody String updatedFaculty) {
-        facultyService.editFacultyById(id, updatedFaculty);
-        return new ResponseEntity<>("Edit faculty success", HttpStatus.OK);
+    public ResponseEntity addOrUpdateFaculty(@RequestBody Faculty faculty) {
+        try {
+            if (facultyService.addOrUpdateFaculty(faculty) == true) {
+                return ResponseEntity.ok("{\"result\":\"success\"}");
+            } else {
+                return ResponseEntity.ok("{\"result\":\"failed\"}");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+    
     @DeleteMapping("/deleteFacultyById/{id}")
     @CrossOrigin
     public ResponseEntity<String> deleteFacultyById(@PathVariable int id) {
-        facultyService.deleteFacultyById(id);
-        return new ResponseEntity<>("Delete faculty success", HttpStatus.OK);
+        try {
+            if (facultyService.deleteFacultyById(id) == true) {
+                return ResponseEntity.ok("{\"result\":\"success\"}");
+            } else {
+                return ResponseEntity.ok("{\"result\":\"failed\"}");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

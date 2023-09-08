@@ -5,6 +5,7 @@
 package com.oujava.service;
 
 import com.oujava.pojo.Rating;
+import com.oujava.pojo.User;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
  * @author trann
  */
 public interface RatingService {
-    List<Rating> getAllRating();
-    void deleteRatingById(int id);
+    List<Rating> getRatingOfCusId(int id);
+    Boolean addOrUpdateRating(Rating rating);
+    Boolean deleteRatingById(int id);
 }

@@ -15,9 +15,7 @@ public interface EmploymentTypeService {
 
     List<EmploymentType> getAllEmType();
 
-    void addEmType(EmploymentType employmentType);
+    Boolean addOrUpdateEmType (EmploymentType employmentType);
 
-    void editEmTypeById(int id, String newEmploymentType);
-
-    void deleteEmTypeById(int id);
+    Boolean deleteEmTypeById(int id);
 }

@@ -22,6 +22,9 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,11 +33,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author nguye
  */
 @Controller
+@ControllerAdvice
 @PropertySource("classpath:configs.properties")
 public class HomeController {
     
-//    @Autowired
-    private LocalSessionFactoryBean factory;
     @Autowired
     private EmploymentTypeService employmentTypeService;
     @Autowired
@@ -42,18 +44,21 @@ public class HomeController {
     @Autowired
     private Environment env;
     
+    
+    @ModelAttribute
+    public void commonAttr(Model model) {
+        model.addAttribute("em", employmentTypeService.getAllEmType());
+    }
+    
     @RequestMapping("/")
     @Transactional
     public String index(Model model, @RequestParam Map<String, String> params){
-//        model.addAttribute("faculty", userRepositoryImpl.getAllPermissionByUserId(1));
-        model.addAttribute("em", employmentTypeService.getAllEmType());
         model.addAttribute("job",jobService.getJobs(params));
         
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
         Long count = jobService.countJob();
         model.addAttribute("counter", Math.ceil(count*1.0/pageSize));
-        return "home";
         
+        return "home";
     }
-    
 }

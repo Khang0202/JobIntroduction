@@ -13,7 +13,6 @@ import java.util.List;
  */
 public interface EmploymentTypeRepository {
     List<EmploymentType> getAllEmType();
-   void addEmType(EmploymentType employmentType);
-    void editEmTypeById(int id, String updateEmploymentType);
-    void deleteEmTypeById(int id);
+    Boolean addOrUpdateEmType(EmploymentType employmentType);
+    Boolean deleteEmTypeById(int id);
 }

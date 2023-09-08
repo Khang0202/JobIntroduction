@@ -25,21 +25,24 @@ public class FacultyServiceImpl implements FacultyService{
     public List<Faculty> getAllFacultys() {
          return facultyRepository.getAllFacultys();
     }
-
-
+    
     @Override
-    public void editFacultyById(int id, String updatedFaculty) {
-         facultyRepository.editFacultyById(id, updatedFaculty);
+    public Boolean addOrUpdateFaculty(Faculty faculty) {
+        if (!faculty.getFaculty().isEmpty()) {
+            return facultyRepository.addOrUpdateFaculty(faculty);
+        } else {
+            return false;
+        }
+    }
+    @Override
+    public Boolean deleteFacultyById(int id) {
+        if(id >= 1){
+            return facultyRepository.deleteFacultyById(id);
+        }else{
+            return false;
+        }
     }
 
-    @Override
-    public void deleteFacultyById(int id) {
-        facultyRepository.deleteFacultyById(id);
-    }
-
-    @Override
-    public void addFaculty(Faculty faculty) {
-        facultyRepository.addFaculty(faculty);
-    }
+    
     
 }

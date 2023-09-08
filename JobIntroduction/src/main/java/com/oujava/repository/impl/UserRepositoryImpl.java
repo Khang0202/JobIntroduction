@@ -138,7 +138,8 @@ public class UserRepositoryImpl implements UserRepository {
         );
         criteriaQuery.where(criteriaBuilder.equal(rootUser.get("roleId"), rootRole.get("id")));
         Query query = session.createQuery(criteriaQuery);
-        return (Role) query.getSingleResult();
+        Role r = (Role) query.getSingleResult();
+        return r;
     }
 
     @Override

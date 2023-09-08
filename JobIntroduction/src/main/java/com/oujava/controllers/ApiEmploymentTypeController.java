@@ -5,9 +5,7 @@
 package com.oujava.controllers;
 
 import com.oujava.pojo.EmploymentType;
-import com.oujava.pojo.User;
 import com.oujava.service.EmploymentTypeService;
-import com.oujava.service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,46 +26,48 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/employmentTypes")
 public class ApiEmploymentTypeController {
-    
+
     @Autowired
     private EmploymentTypeService employmentTypeService;
-    @Autowired
-    private UserService userService;
 
     @GetMapping("/getAllEmploymentType")
     @CrossOrigin
-    public List<EmploymentType> getAllEmploymentTypes() {
-        return employmentTypeService.getAllEmType();
+    public ResponseEntity<List<EmploymentType>> getAllEmploymentTypes() {
+        try {
+            return new ResponseEntity<>(employmentTypeService.getAllEmType(),HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @PostMapping("/addEmploymentType")
+    @PostMapping("/addOrUpdateEmType")
     @CrossOrigin
-    public void addEmploymentType(@RequestBody EmploymentType employmentType) {
-        employmentTypeService.addEmType(employmentType);
-    }
-
-    @PutMapping("/editEmploymentTyoeById/{id}")
-    @CrossOrigin
-    public void editEmploymentType(@PathVariable int id, @RequestBody String updatedEmploymentType) {
-        employmentTypeService.editEmTypeById(id, updatedEmploymentType);
+    public ResponseEntity addOrUpdateEmType(@RequestBody EmploymentType employmentType) {
+        try {
+            if (employmentTypeService.addOrUpdateEmType(employmentType) == true) {
+                return ResponseEntity.ok("{\"result\":\"success\"}");
+            } else {
+                return ResponseEntity.ok("{\"result\":\"failed\"}");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/deleteEmTypeById/{id}")
     @CrossOrigin
-    public void deleteEmploymentType(@PathVariable int id) {
-        employmentTypeService.deleteEmTypeById(id);
-    }
-    
-    @PostMapping("/login")
-    @CrossOrigin
-    public ResponseEntity<String> login(String input, String password) {
-
-        User user = userService.login(input, password);
-
-        if (user != null) {
-            return new ResponseEntity<>("Đăng nhập thành công", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Đăng nhập thất bại", HttpStatus.UNAUTHORIZED);
+    public ResponseEntity deleteEmploymentType(@PathVariable int id) {
+        try {
+            if (employmentTypeService.deleteEmTypeById(id) == true) {
+                return ResponseEntity.ok("{\"result\":\"success\"}");
+            } else {
+                return ResponseEntity.ok("{\"result\":\"failed\"}");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

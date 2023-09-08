@@ -3,6 +3,7 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Rating.ja
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\format\GetRole.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\EmploymentType.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\SkillRepository.java
+D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\testapi.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\UserServiceImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\ApiRatingController.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\ApiJobController.java
@@ -20,6 +21,7 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\Use
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\SkillService.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\configs\SpringSecurityConfig.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\RolePermission.java
+D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\configs\TilesConfigs.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\JobServiceImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\EmploymentTypeRepository.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\RoleRepository.java
@@ -38,6 +40,7 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\imp
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\filters\CustomAccessDeniedHandler.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\HomeController.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\RatingServiceImpl.java
+D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\JobController.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\JobRepositoryImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\JobService.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\RoleServiceImpl.java

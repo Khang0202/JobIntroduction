@@ -9,6 +9,7 @@ import com.oujava.repository.EmploymentTypeRepository;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -30,36 +31,45 @@ public class EmploymentTypeRepositoryImpl implements EmploymentTypeRepository {
     @Override
     public List<EmploymentType> getAllEmType() {
         Session session = sessionFactory.getCurrentSession();
-        Query q = session.createNamedQuery("EmploymentType.findAll");
-        
+        try{
+            Query q = session.createNamedQuery("EmploymentType.findAll");
         return q.getResultList();
-    }
-
-    @Override
-    public void addEmType(EmploymentType employmentType) {
-        Session session = sessionFactory.getCurrentSession();
-        session.save(employmentType);
-    }
-
-    @Override
-    public void editEmTypeById(int id, String updateEmploymentType) {
-        Session session = sessionFactory.getCurrentSession();
-        EmploymentType existingEmploymentType = session.get(EmploymentType.class, id);
-        if (existingEmploymentType != null) {
-             existingEmploymentType.setEmployment(updateEmploymentType);
-            session.update(existingEmploymentType);
+        }catch (HibernateException e){
+            e.printStackTrace();
+            return null;
         }
-        else{}
     }
 
     @Override
-    public void deleteEmTypeById(int id) {
+    public Boolean addOrUpdateEmType(EmploymentType employmentType) {
         Session session = sessionFactory.getCurrentSession();
-        EmploymentType employmentType = session.load(EmploymentType.class, id);
-        if (employmentType != null) {
-            session.delete(employmentType);
+        try {
+            if (employmentType.getId() == null) {
+                session.save(employmentType);
+            } else {
+                session.update(employmentType);
+            }
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
         }
-        else{}
+    }
+
+    @Override
+    public Boolean deleteEmTypeById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            if (session.load(EmploymentType.class, id) != null) {
+                session.delete(session.load(EmploymentType.class, id));
+                return true;
+            } else {
+                return false;
+            }
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
 
     }
 }
