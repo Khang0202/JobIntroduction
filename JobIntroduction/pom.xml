@@ -26,11 +26,6 @@
             <version>1.29.0</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.tiles</groupId>
-            <artifactId>tiles-extras</artifactId>
-            <version>3.0.8</version>
-        </dependency>
-        <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>9.31</version>
@@ -46,11 +41,6 @@
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.6.15.Final</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -100,31 +90,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.28</version>
-            <scope>provided</scope>
-        </dependency>
-       
-        <!-- hibernate-core -->
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.6.15.Final</version>
         </dependency>
-        <!--mysql-connector-j -->
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <version>8.0.33</version>
-        </dependency>
-        <!-- spring-webmvc -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>5.3.29</version>
         </dependency>
-        <!-- spring-orm -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
@@ -135,22 +109,15 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.15.2</version>
         </dependency>
-        <!-- jstl -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        <!--tiles-extras -->
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-extras</artifactId>
             <version>3.0.8</version>
-        </dependency>
-        <dependency>
-            <groupId>com.cloudinary</groupId>
-            <artifactId>cloudinary-http44</artifactId>
-            <version>1.29.0</version>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -163,11 +130,6 @@
             <version>2.6</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>6.1.1.Final</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
             <version>5.2.1.RELEASE</version>
@@ -177,25 +139,11 @@
             <artifactId>spring-security-config</artifactId>
             <version>5.2.1.RELEASE</version>
         </dependency>
-        <!--spring-boot-starter-freemarker -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.12.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>nimbus-jose-jwt</artifactId>
-            <version>9.31</version>
-        </dependency>
-        
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>5.2.1.RELEASE</version>
         </dependency>
-        <!--======-->
-        
     </dependencies>
     <build>
         <plugins>
