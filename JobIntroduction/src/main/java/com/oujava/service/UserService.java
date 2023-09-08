@@ -19,9 +19,18 @@ public interface UserService {
     void editRoleByUserId(int userId, int roleId); 
     User getUserByUsername(String username);
     void editActiveByUserId(int userId, boolean active); 
+<<<<<<< Updated upstream
     User  login(String username,String password);
     void registerCandidate(User user);
     void registerCustomer(User user);
 
+=======
+    User login(String username,String password);
+    
+    User register(Map<String, String> params, MultipartFile avatar);
+    
+  
+    Role getUserRoleByUserId(int id);
+>>>>>>> Stashed changes
     
 }

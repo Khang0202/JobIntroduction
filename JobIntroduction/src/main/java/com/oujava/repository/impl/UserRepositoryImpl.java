@@ -10,6 +10,7 @@ import com.oujava.pojo.Role;
 import com.oujava.pojo.RolePermission;
 import com.oujava.pojo.User;
 import com.oujava.repository.UserRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.NoResultException;
@@ -21,6 +22,10 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< Updated upstream
+=======
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+>>>>>>> Stashed changes
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +39,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
+<<<<<<< Updated upstream
+=======
+    @Autowired
+    private LocalSessionFactoryBean factory;
+>>>>>>> Stashed changes
 
     @Override
     public List<User> getAllUsers() {
@@ -161,6 +171,67 @@ public class UserRepositoryImpl implements UserRepository {
         return (User) q.getSingleResult();
     }
 
+<<<<<<< Updated upstream
     
+=======
+    @Override
+    public Role getUserRoleByUserId(int id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Role> criteriaQuery = criteriaBuilder.createQuery(Role.class);
+        Root rootUser = criteriaQuery.from(User.class);
+        Root rootRole = criteriaQuery.from(Role.class);
+        criteriaQuery.multiselect(
+                rootRole.get("id"),
+                rootRole.get("role")
+        );
+        criteriaQuery.where(criteriaBuilder.equal(rootUser.get("roleId"), rootRole.get("id")));
+        Query query = session.createQuery(criteriaQuery);
+        return (Role) query.getSingleResult();
+    }
+
+    @Override
+    public User login(String usernameOrEmail, String password) {
+        Session session = sessionFactory.getCurrentSession();
+        User user = null;
+        
+         if (!checkUserAndMail(usernameOrEmail)) {
+        return null; 
+    }
+
+        Query query = session.createQuery("FROM User WHERE username = :input OR email = :input", User.class);
+        query.setParameter("input", usernameOrEmail);
+        try {
+            user = (User) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public User register(User user) {
+         if (checkUserAndMail(user.getUsername()) || checkUserAndMail(user.getEmail())) {
+        return null; 
+    }
+        Session s = this.factory.getObject().getCurrentSession();
+        s.save(user);
+        return user;
+    }
+
+    @Override
+    public boolean checkUserAndMail(String input) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("SELECT COUNT(*) FROM User WHERE username = :input OR email = :input", Long.class);
+        query.setParameter("input", input);
+         long count = (Long) query.getSingleResult();
+        return count > 0;
+    }
+>>>>>>> Stashed changes
 
 }
