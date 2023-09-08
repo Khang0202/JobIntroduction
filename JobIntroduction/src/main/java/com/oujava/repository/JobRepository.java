@@ -17,8 +17,6 @@ public interface JobRepository{
    List<Job> getAllJobs();
    Long countJob();
    List<Job> getJobs(Map<String, String> params);
-   Job getJobById(int id);
-   
    void addJob(Job job);
    void editJobById(int id, Job updatedJob); 
    void deleteJobById(int id); 

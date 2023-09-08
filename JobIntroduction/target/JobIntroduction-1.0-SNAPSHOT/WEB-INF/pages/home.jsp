@@ -10,7 +10,7 @@
 <section class="container">
     <div class="container mt-4">
         <h1 class="text-center mt-1">DANH SÁCH TIN TUYỂN DỤNG</h1>
-        <a href="<c:url value="/register" />" class="btn btn-info mb-3">Thêm tin tuyển dụng</a>
+        <a href="<c:url value="/job" />" class="btn btn-info mb-3">Thêm tin tuyển dụng</a>
         <c:if test="${counter > 1}">
             <ul class="pagination mt-1">
                 <li class="page-item"><a class="page-link" href="<c:url value="/" />">Tất cả</a></li>

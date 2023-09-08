@@ -30,7 +30,6 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\Ap
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\SkillRepositoryImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\UserRepositoryImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Job.java
-D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\RegisterController.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\User.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\EmploymentTypeServiceImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Role.java
@@ -39,7 +38,6 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Skill.jav
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\pojo\Apply.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\impl\RatingRepositoryImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\filters\CustomAccessDeniedHandler.java
-D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\format\RoleFormatter.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\HomeController.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\RatingServiceImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\JobController.java
@@ -51,7 +49,6 @@ D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\imp
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\configs\WebAppContextConfig.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\service\impl\FacultyServiceImpl.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\repository\JobRepository.java
-D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\configs\SecurityWebApplicationInitializer.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\controllers\ApiRoleController.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\components\JwtService.java
 D:\JavaExcellentExercise\JobIntroduction\src\main\java\com\oujava\configs\HibernateConfig.java

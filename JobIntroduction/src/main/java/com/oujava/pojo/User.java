@@ -28,7 +28,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -60,27 +59,18 @@ import org.springframework.web.multipart.MultipartFile;
 public class User implements Serializable {
 
     /**
-     * @return the birthform
-     */
-    public String getBirthform() {
-        return birthform;
-    }
-
-    /**
-     * @param birthform the birthform to set
-     */
-    public void setBirthform(String birthform) {
-        this.birthform = birthform;
-    }
-
-    /**
-     * @return the file
-     */
-    
-
-    /**
      * @return the fileImage
      */
+    public File getFileImage() {
+        return fileImage;
+    }
+
+    /**
+     * @param fileImage the fileImage to set
+     */
+    public void setFileImage(File fileImage) {
+        this.fileImage = fileImage;
+    }
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -99,7 +89,7 @@ public class User implements Serializable {
     @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
-//    @NotNull
+    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "image")
     private String image;
@@ -177,20 +167,8 @@ public class User implements Serializable {
     private Role roleId;
     
     @Transient
-    private MultipartFile file;
-    @Transient
-    private String birthform;
+    private File fileImage;
     
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    /**
-     * @param file the file to set
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
 
     public User() {
     }
