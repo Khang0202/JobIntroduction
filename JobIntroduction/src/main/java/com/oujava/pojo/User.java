@@ -99,7 +99,7 @@ public class User implements Serializable {
     @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
-//    @NotNull
+    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "image")
     private String image;

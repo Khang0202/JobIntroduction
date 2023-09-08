@@ -6,14 +6,17 @@ package com.oujava.controllers;
 
 import com.oujava.format.GetDate;
 import com.oujava.pojo.User;
+import com.oujava.service.RoleService;
 import com.oujava.service.UserService;
 import java.util.Date;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -24,10 +27,18 @@ public class RegisterController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
+    @ModelAttribute
+    public void commonAttr(Model model) {
+        
+    }
+    
     @GetMapping("/register")
-    public String register(Model model) {
+    public String register(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("user", new User());
+        model.addAttribute("role", roleService.getAllRole(params));
         return "register";
     }
 

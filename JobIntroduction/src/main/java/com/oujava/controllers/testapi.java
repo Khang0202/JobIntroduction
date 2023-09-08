@@ -126,16 +126,16 @@ public class testapi {
         }
     }
     
-    @GetMapping("/rolelist")
-    @CrossOrigin
-    public ResponseEntity<List<Role>> listRole() {
-        try {
-            return new ResponseEntity<>(this.roleService.getAllRole(), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @GetMapping("/rolelist")
+//    @CrossOrigin
+//    public ResponseEntity<List<Role>> listRole() {
+//        try {
+//            return new ResponseEntity<>(this.roleService.getAllRole(), HttpStatus.OK);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
     
 //    @GetMapping("/user/{userId}/rating")
 //    @CrossOrigin

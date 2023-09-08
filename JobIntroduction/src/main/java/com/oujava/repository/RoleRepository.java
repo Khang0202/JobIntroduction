@@ -6,11 +6,12 @@ package com.oujava.repository;
 
 import com.oujava.pojo.Role;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author trann
  */
 public interface RoleRepository {
-    List<Role> getAllRole();
+    List<Role> getAllRole(Map<String, String> params);
 }

@@ -85,10 +85,10 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 //        return validator();
 //    }
 //
-//    @Override
-//    public void addFormatters(FormatterRegistry registry) {
-//        registry.addFormatter(new RoleFormatter());
-//    }
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new RoleFormatter());
+    }
 
     @Bean
     public Cloudinary cloudinary() {

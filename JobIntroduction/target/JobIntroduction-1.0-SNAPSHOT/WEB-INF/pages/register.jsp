@@ -21,6 +21,11 @@
         <form:input type="text" class="form-control" path="lastName" id="lastName"/>
         <label for="lastName">Họ</label>
     </div>
+    <form:select class="form-select" id="category" name="category" path="roleId">
+        <c:forEach items="${role}" var="c">
+            <option value="${c.id}">${c.role}</option>
+        </c:forEach>
+    </form:select>
     <div class="form-floating mt-3 mb-3">
         <form:input type="text" class="form-control" path="email" id="email"/>
         <label for="email">Email</label>
@@ -49,6 +54,7 @@
         <form:input type="file" class="form-control" path="file" id="file"/>
         <label for="file">Email</label>
     </div>
+
     <div class="form-floating mb-3 mt-3 text-center">
         <button class="btn btn-info" type="submit">Đăng ký
         </button>
