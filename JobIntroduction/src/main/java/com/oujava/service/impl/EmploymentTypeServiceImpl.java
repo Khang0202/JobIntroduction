@@ -27,19 +27,21 @@ public class EmploymentTypeServiceImpl implements EmploymentTypeService {
     }
 
     @Override
-    public void addEmType(EmploymentType employmentType) {
-        employmentTypeRepository.addEmType(employmentType);
+    public Boolean addOrUpdateEmType(EmploymentType employmentType) {
+        if(!employmentType.getEmployment().isEmpty()){
+            return employmentTypeRepository.addOrUpdateEmType(employmentType);
+        }else{
+            return false;
+        }
     }
 
     @Override
-    public void editEmTypeById(int id, String newEmploymentType) {
-        employmentTypeRepository.editEmTypeById(id, newEmploymentType);
-
-    }
-
-    @Override
-    public void deleteEmTypeById(int id) {
-        employmentTypeRepository.deleteEmTypeById(id);
+    public Boolean deleteEmTypeById(int id) {
+        if(id >= 1){
+            return employmentTypeRepository.deleteEmTypeById(id);
+        }else{
+            return false;
+        }
     }
 
 }

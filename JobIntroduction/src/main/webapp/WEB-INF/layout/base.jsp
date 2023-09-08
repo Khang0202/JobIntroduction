@@ -16,10 +16,9 @@
     </head>
     <body style="min-height: 100vh; display: flex; flex-direction: column;">
         <tiles:insertAttribute name="header"/>
-        <div class="container " style="flex: 1;">
+        <div class="container" style="flex: 1;">
             <tiles:insertAttribute name="content"/>
         </div>
         <tiles:insertAttribute name="footer"/>
-
     </body>
 </html>

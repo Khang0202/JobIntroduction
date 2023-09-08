@@ -41,6 +41,7 @@ com\oujava\controllers\ApiUserController.class
 com\oujava\configs\JwtSecurityConfig.class
 com\oujava\pojo\Role_.class
 com\oujava\pojo\Skill_.class
+com\oujava\controllers\testapi.class
 com\oujava\service\impl\FacultyServiceImpl.class
 com\oujava\configs\SpringSecurityConfig.class
 com\oujava\pojo\Apply_.class
@@ -51,6 +52,7 @@ com\oujava\pojo\Permission.class
 com\oujava\pojo\Faculty_.class
 com\oujava\pojo\Skill.class
 com\oujava\repository\RoleRepository.class
+com\oujava\controllers\JobController.class
 com\oujava\pojo\Job_.class
 com\oujava\pojo\User_.class
 com\oujava\configs\TilesConfigs.class

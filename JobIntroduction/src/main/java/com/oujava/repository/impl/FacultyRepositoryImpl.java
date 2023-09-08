@@ -7,6 +7,7 @@ package com.oujava.repository.impl;
 import com.oujava.pojo.Faculty;
 import com.oujava.repository.FacultyRepository;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -27,37 +28,46 @@ public class FacultyRepositoryImpl implements FacultyRepository {
 
     @Override
     public List<Faculty> getAllFacultys() {
-       Session session = sessionFactory.getCurrentSession();
-        Query q = session.createNamedQuery("Faculty.findAll");
-        
-        return q.getResultList();
-    }
-
-    @Override
-    public void editFacultyById(int id, String updatedFaculty) {
         Session session = sessionFactory.getCurrentSession();
-        Faculty existingFaculty = session.get(Faculty.class, id);
-        if (existingFaculty != null) {
-            existingFaculty.setFaculty(updatedFaculty);
-            session.update(existingFaculty);
+        try {
+            Query q = session.createNamedQuery("Faculty.findAll");
+            return q.getResultList();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return null;
         }
-        else{}
     }
 
     @Override
-    public void deleteFacultyById(int id) {
+    public Boolean addOrUpdateFaculty(Faculty faculty) {
         Session session = sessionFactory.getCurrentSession();
-        Faculty faculty = session.get(Faculty.class, id);
-        if (faculty != null) {
-            session.delete(faculty);
+        try {
+            if (faculty.getId() == null) {
+                session.save(faculty);
+            } else {
+                session.update(faculty);
+            }
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
         }
-        else{}
-
     }
 
     @Override
-    public void addFaculty(Faculty faculty) {
+    public Boolean deleteFacultyById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(faculty);
+        try {
+            if (session.load(Faculty.class, id) != null) {
+                session.delete(session.load(Faculty.class, id));
+                return true;
+            } else {
+                return false;
+            }
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
 }

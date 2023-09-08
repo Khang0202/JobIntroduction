@@ -18,11 +18,12 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/home.jsp" />
     </definition>
-<!--    <definition name="products" extends="baseLayout">
-        <put-attribute name="title" value="Quản trị sản phẩm" />
+    <definition name="job" extends="baseLayout">
+        <put-attribute name="title" value="Thêm tin tuyển dụng" />
         <put-attribute name="content"
-                       value="/WEB-INF/pages/products.jsp" />
+                       value="/WEB-INF/pages/job.jsp" />
     </definition>
+    <!--
     <definition name="login" extends="baseLayout">
         <put-attribute name="title" value="Đăng nhập" />
         <put-attribute name="content"

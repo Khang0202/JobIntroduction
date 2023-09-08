@@ -4,6 +4,7 @@
  */
 package com.oujava.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -47,8 +48,10 @@ public class Role implements Serializable {
     @Column(name = "role")
     private String role;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId")
+    @JsonIgnore
     private Set<RolePermission> rolePermissionSet;
     @OneToMany(mappedBy = "roleId")
+    @JsonIgnore
     private Set<User> userSet;
 
     public Role() {

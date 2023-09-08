@@ -28,9 +28,12 @@ public class ApiRoleController {
     @GetMapping("/rolelist")
     @CrossOrigin
     public ResponseEntity<List<Role>> listRole() {
-        List<Role> role = this.roleService.getAllRole();
-        return new ResponseEntity<>(role, HttpStatus.OK);
-
+        try {
+            return new ResponseEntity<>(this.roleService.getAllRole(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     
 }
