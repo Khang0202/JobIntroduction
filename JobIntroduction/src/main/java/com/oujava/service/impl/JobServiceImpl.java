@@ -54,11 +54,6 @@ public class JobServiceImpl implements JobService{
     public List<Job> getJobs(Map<String, String> params) {
         return this.jobRepo.getJobs(params);
     }
-
-    @Override
-    public Job getJobById(int id) {
-        return this.jobRepo.getJobById(id);
-    }
     
   
 }

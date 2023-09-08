@@ -135,8 +135,6 @@ public class JobRepositoryImpl implements JobRepository{
         return Long.parseLong(q.getSingleResult().toString());
     }
     
-    
-    
     @Override
     public List<Job> getJobs(Map<String, String> params) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -186,13 +184,5 @@ public class JobRepositoryImpl implements JobRepository{
             j.setPosterName(j.getEmployerId().getFirstName());
         }
         return jobs;
-    }
-
-    @Override
-    public Job getJobById(int id) {
-        Session s = sessionFactory.getCurrentSession();
-        Query q = s.createNamedQuery("Job.findById");
-        q.setParameter("id", id);
-        return (Job) q.getResultList();
     }
 }

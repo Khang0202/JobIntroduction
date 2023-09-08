@@ -18,9 +18,10 @@ public interface UserRepository {
     List<Permission> getAllPermissionByUserId(int userId);
     User getUserByUsername(String username);
     User login(String username,String password);
-    boolean register(User user);
+    User register(User user);
+    void registerCandidate(User user);
+    void registerCustomer(User user);
     void editRoleByUserId(int userId, int roleId); 
     Role getUserRoleByUserId(int id);
     void editActiveByUserId(int userId, boolean active); 
-    boolean checkUserAndMail(String input);
 }
