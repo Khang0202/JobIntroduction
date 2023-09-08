@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author trann
  */
-public interface UserService{
+public interface UserService extends UserDetailsService{
     List<User> getAllUsers(); 
     List<Permission> getAllPermissionByUserId(int userId);
     User getUserByUsername(String username);

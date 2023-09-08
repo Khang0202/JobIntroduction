@@ -27,6 +27,18 @@
                         <a class="nav-link" href="${searchUrl}">${e.employment}</a>
                     </li>
                 </c:forEach>
+                <c:choose>
+                    <c:when test="${pageContext.request.userPrincipal.name != null}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/" />">${pageContext.request.userPrincipal.name}</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/login" />">Đăng nhập</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
             <form class="d-flex mt-2" action="${action}" >
                 <input class="form-control me-2" type="text" name="key" placeholder="Nhập từ khóa...">
