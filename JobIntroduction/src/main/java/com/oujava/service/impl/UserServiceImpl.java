@@ -4,40 +4,39 @@
  */
 package com.oujava.service.impl;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
-import com.oujava.format.GetDate;
 import com.oujava.pojo.Permission;
 import com.oujava.pojo.Role;
 import com.oujava.pojo.User;
 import com.oujava.repository.UserRepository;
 import com.oujava.service.UserService;
+import java.util.List;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import com.oujava.format.GetDate;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author trann
  */
-@Service
-public class UserServiceImpl implements UserService{
+@Service("userDetailsService")
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepo;
-    
+    @Autowired
     private Cloudinary cloudinary;
-    
-//    @Autowired
-    //    private BCryptPasswordEncoder passEncoder;
-    
+
+    @Autowired
+    private BCryptPasswordEncoder passEncoder;
+
     @Override
     public List<User> getAllUsers() {
         return userRepo.getAllUsers();
@@ -58,12 +57,11 @@ public class UserServiceImpl implements UserService{
         return userRepo.login(usernameOrEmail, password);
     }
 
-    
-
     @Override
     public List<Permission> getAllPermissionByUserId(int userId) {
         return userRepo.getAllPermissionByUserId(userId);
     }
+
     @Override
     public User getUserByUsername(String username) {
         return userRepo.getUserByUsername(username);
@@ -72,16 +70,6 @@ public class UserServiceImpl implements UserService{
     @Override
     public Role getUserRoleByUserId(int id) {
         return userRepo.getUserRoleByUserId(id);
-    }
-
-    @Override
-    public void registerCandidate(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void registerCustomer(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 //    @Override
@@ -110,5 +98,59 @@ public class UserServiceImpl implements UserService{
 //                }
 //            }
 //        return null;
+//    }
+    @Override
+    public boolean register(User user) {
+        user.setPassword(passEncoder.encode(user.getPassword()));
+        try {
+            user.setBirth(GetDate.getDateFromString(user.getBirthform()));
+        } catch (ParseException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//
+//        u.setSex(user.getSex());
+
+//        String roleIdStr = params.get("roleId");
+//        if (roleIdStr != null && !roleIdStr.isEmpty()) {
+//            try {
+////                u.setRoleId(new Role(Integer.valueOf(roleIdStr)));
+//                user.setRoleId(user.getRoleId());
+//                
+//            } catch (NumberFormatException ex) {
+//
+//                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, "Invalid roleId format", ex);
+//            }
+//        }
+        if (!user.getFile().isEmpty()) {
+            try {
+                Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                user.setImage(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+//        user.setAddress(params.get("address"));
+//        user.setExperience(Integer.parseInt(params.get("experience")));
+//        user.setFilecv(params.get("filecv"));
+//        user.setCurentposition(params.get("currentposition"));
+//        user.setEducation(params.get("education"));
+//        user.setCountry(params.get("country"));
+//        user.setUrlinfo(params.get("urlinfo"));
+        return this.userRepo.register(user);
+//        return user;
+    }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
+//        List<User> users = (List<User>) userRepo.getUserByUsername(string);
+//        if (users.isEmpty()) {
+//            throw new UsernameNotFoundException("Không tồn tại!");
+//        }
+//        User u = users.get(0);
+//        Set<GrantedAuthority> authorities = new HashSet<>();
+//        authorities.add(new SimpleGrantedAuthority(u.getUserRole()));
+//        return new org.springframework.security.core.userdetails.User(
+//                u.getUsername(), u.getPassword(), authorities);
 //    }
 }

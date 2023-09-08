@@ -60,18 +60,23 @@ import org.springframework.web.multipart.MultipartFile;
 public class User implements Serializable {
 
     /**
-     * @return the file
+     * @return the birthform
      */
-    public MultipartFile getFile() {
-        return file;
+    public String getBirthform() {
+        return birthform;
     }
 
     /**
-     * @param file the file to set
+     * @param birthform the birthform to set
      */
-    public void setFile(MultipartFile file) {
-        this.file = file;
+    public void setBirthform(String birthform) {
+        this.birthform = birthform;
     }
+
+    /**
+     * @return the file
+     */
+    
 
     /**
      * @return the fileImage
@@ -94,7 +99,7 @@ public class User implements Serializable {
     @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "image")
     private String image;
@@ -173,7 +178,19 @@ public class User implements Serializable {
     
     @Transient
     private MultipartFile file;
+    @Transient
+    private String birthform;
     
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
 
     public User() {
     }
