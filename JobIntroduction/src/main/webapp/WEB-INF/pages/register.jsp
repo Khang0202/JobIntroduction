@@ -21,11 +21,14 @@
         <form:input type="text" class="form-control" path="lastName" id="lastName"/>
         <label for="lastName">Họ</label>
     </div>
-    <form:select class="form-select" id="category" name="category" path="roleId">
-        <c:forEach items="${role}" var="c">
-            <option value="${c.id}">${c.role}</option>
-        </c:forEach>
-    </form:select>
+    <div class="form-floating mt-3 mb-3">
+        <form:select class="form-select" id="role" name="role" path="roleId">
+            <c:forEach items="${role}" var="c">
+                <option value="${c.id}">${c.role}</option>
+            </c:forEach>
+        </form:select>
+        <label for="role">Vị trí</label>
+    </div>
     <div class="form-floating mt-3 mb-3">
         <form:input type="text" class="form-control" path="email" id="email"/>
         <label for="email">Email</label>

@@ -4,6 +4,9 @@ values("Khang", "Nguyễn", "link", "aa@aa.aa", "0123456","Nam", '2002-02-02', "
 SELECT * FROM jobdb.job;
 insert into job(employer_id, name, employment_type_id, salary, company, address, phone, emailcompany, date_posted)
 values(2, "a,fffffvvvv", 3, 5000000, "a", "aaa", "01100000","aaa0a0a0a0a", "2023-09-07");
-
+SELECT * FROM jobdb.role;
 insert into rating(candidate_id, employer_id, star, comment)
 values(3, 2, 1, "bad");
+update role
+set role = "Nhà tuyển dụng"
+where id = 3
