@@ -66,22 +66,22 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.formLogin()
-//                .usernameParameter("username")
-//                .passwordParameter("password");
-//
-//        http.formLogin().defaultSuccessUrl("/")
-//                .failureUrl("/login?error");
-//
-//        http.logout().logoutSuccessUrl("/login");
-//
-//        http.exceptionHandling()
-//                .accessDeniedPage("/login?accessDenied");
+        http.formLogin()
+                .usernameParameter("username")
+                .passwordParameter("password");
 
-//        http.authorizeRequests().antMatchers("/").permitAll()
-//            .antMatchers("/api/**")
-//            .access("hasRole('ROLE_ADMIN')");
-//        http.csrf().disable();
+        http.formLogin().defaultSuccessUrl("/")
+                .failureUrl("/login?error");
+
+        http.logout().logoutSuccessUrl("/login");
+
+        http.exceptionHandling()
+                .accessDeniedPage("/login?accessDenied");
+
+        http.authorizeRequests().antMatchers("/").permitAll()
+            .antMatchers("/api/**")
+            .access("hasRole('ROLE_ADMIN')");
+        http.csrf().disable();
 
         // Disable crsf cho đường dẫn /rest/**
         http.csrf().ignoringAntMatchers("/api/**");

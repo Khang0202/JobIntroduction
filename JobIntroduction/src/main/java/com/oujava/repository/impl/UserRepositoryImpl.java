@@ -10,6 +10,7 @@ import com.oujava.pojo.RolePermission;
 import com.oujava.pojo.User;
 import com.oujava.repository.UserRepository;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -37,8 +38,8 @@ public class UserRepositoryImpl implements UserRepository {
     private SessionFactory sessionFactory;
     @Autowired
     private LocalSessionFactoryBean factory;
-//    @Autowired
-//    private BCryptPasswordEncoder passEncoder;
+    @Autowired
+    private BCryptPasswordEncoder passEncoder;
 
     @Override
     public List<User> getAllUsers() {
@@ -142,45 +143,76 @@ public class UserRepositoryImpl implements UserRepository {
         return r;
     }
 
+//    @Override
+//    public User login(String usernameOrEmail, String password) {
+//        Session session = sessionFactory.getCurrentSession();
+//        User user = null;
+//
+//        Query query = session.createQuery("FROM User WHERE username = :input OR email = :input", User.class);
+//        query.setParameter("input", usernameOrEmail);
+//        try {
+//            user = (User) query.getSingleResult();
+//        } catch (NoResultException e) {
+//            return null;
+//        }
+//
+//        if (user != null && user.getPassword().equals(password)) {
+//            return user;
+//        } else {
+//            return null;
+//        }
+//    }
+
     @Override
     public User login(String usernameOrEmail, String password) {
-    Session session = sessionFactory.getCurrentSession();
-    User user = null;
+        Session session = sessionFactory.getCurrentSession();
+        User user = null;
 
-    Query query = session.createQuery("FROM User WHERE username = :input OR email = :input", User.class);
-    query.setParameter("input", usernameOrEmail);
-    try {
-        user = (User) query.getSingleResult();
-    } catch (NoResultException e) {    
-        return null; 
-    }
+        if (!checkUserAndMail(usernameOrEmail)) {
+            return null;
+        }
 
-    if (user != null && user.getPassword().equals(password)) {
-        return user; 
-    } else {
-        return null; 
+        Query query = session.createQuery("FROM User WHERE username = :input OR email = :input", User.class);
+        query.setParameter("input", usernameOrEmail);
+        try {
+            user = (User) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        } else {
+            return null;
+        }
     }
-}
 
     @Override
-    public void registerCandidate(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void registerCustomer(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    
-    //add user của thầy
-    @Override
-    public User register(User user) {
-        Session s = this.factory.getObject().getCurrentSession();
+    public boolean register(User user) {
+//        if (checkUserAndMail(user.getUsername()) || checkUserAndMail(user.getEmail())) {
+//            return false;
+////        }
+//        user.setBirth(new Date());
+        Session s = this.sessionFactory.getCurrentSession();
         s.save(user);
-        return user;
+        return true;
     }
 
-    
+    @Override
+    public boolean checkUserAndMail(String input) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("SELECT COUNT(*) FROM User WHERE username = :input OR email = :input", Long.class);
+        query.setParameter("input", input);
+        long count = (Long) query.getSingleResult();
+        return count > 0;
+    }
+
+    //add user của thầy
+//    @Override
+//    public User register(User user) {
+//        Session s = this.factory.getObject().getCurrentSession();
+//        s.save(user);
+//        return user;
+//    }
 
 }

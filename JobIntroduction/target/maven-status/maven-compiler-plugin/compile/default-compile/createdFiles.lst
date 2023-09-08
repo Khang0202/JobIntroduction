@@ -1,6 +1,7 @@
 com\oujava\service\SkillService.class
 com\oujava\service\impl\SkillServiceImpl.class
 com\oujava\configs\WebAppContextConfig.class
+com\oujava\format\RoleFormatter.class
 com\oujava\controllers\ApiSkillController.class
 com\oujava\service\impl\UserServiceImpl.class
 com\oujava\pojo\RolePermission.class
@@ -12,6 +13,7 @@ com\oujava\controllers\ApiRoleController.class
 com\oujava\pojo\EmploymentType_.class
 com\oujava\components\JwtService.class
 com\oujava\controllers\ApiJobController.class
+com\oujava\configs\SecurityWebApplicationInitializer.class
 com\oujava\pojo\Apply.class
 com\oujava\pojo\Role.class
 com\oujava\configs\HibernateConfig.class
@@ -45,6 +47,7 @@ com\oujava\controllers\testapi.class
 com\oujava\service\impl\FacultyServiceImpl.class
 com\oujava\configs\SpringSecurityConfig.class
 com\oujava\pojo\Apply_.class
+com\oujava\controllers\RegisterController.class
 com\oujava\repository\RatingRepository.class
 com\oujava\pojo\Faculty.class
 com\oujava\service\JobService.class

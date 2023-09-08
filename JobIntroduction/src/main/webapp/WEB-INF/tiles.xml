@@ -23,10 +23,10 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/job.jsp" />
     </definition>
-    <!--
-    <definition name="login" extends="baseLayout">
-        <put-attribute name="title" value="Đăng nhập" />
+    
+    <definition name="register" extends="baseLayout">
+        <put-attribute name="title" value="Đăng ký" />
         <put-attribute name="content"
-                       value="/WEB-INF/pages/login.jsp" />
-    </definition>-->
+                       value="/WEB-INF/pages/register.jsp" />
+    </definition>
 </tiles-definitions>
