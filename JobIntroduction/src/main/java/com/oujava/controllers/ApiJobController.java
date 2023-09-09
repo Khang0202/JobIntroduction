@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author trann
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/job")
 
 public class ApiJobController {
 
@@ -63,7 +63,7 @@ public ResponseEntity<String> editJobById(@PathVariable int id, @RequestBody Job
 }
 
 
-    @DeleteMapping("/job/{id}")
+    @DeleteMapping("/deljob/{id}")
     @CrossOrigin
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteJobById(@PathVariable int id) {

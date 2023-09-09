@@ -39,31 +39,31 @@ public class ApiUserController {
     @Autowired
     private JwtService JwtService;
 
-    @PostMapping("/login")
-    @CrossOrigin
-    public ResponseEntity<String> login(@RequestBody Map<String, String> loginRequest) {
-        String input = loginRequest.get("input");
-        String password = loginRequest.get("password");
-        User user = userService.login(input, password);
-        
-        if (user != null) {
-            return new ResponseEntity<>("Đăng nhập thành công", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Đăng nhập thất bại", HttpStatus.UNAUTHORIZED);
-        }
-    }
-    @GetMapping("/{userId}/rating")
-    @CrossOrigin
-    public ResponseEntity<List<Rating>> listrating(@PathVariable (value = "userId") int id) {
-        try {
-            return new ResponseEntity<>(ratingService.getRatingOfCusId(id),HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping("/login")
+//    @CrossOrigin
+//    public ResponseEntity<String> login(@RequestBody Map<String, String> loginRequest) {
+//        String input = loginRequest.get("input");
+//        String password = loginRequest.get("password");
+//        User user = userService.login(input, password);
+//        
+//        if (user != null) {
+//            return new ResponseEntity<>("Đăng nhập thành công", HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>("Đăng nhập thất bại", HttpStatus.UNAUTHORIZED);
+//        }
+//    }
+//    @GetMapping("/{userId}/rating")
+//    @CrossOrigin
+//    public ResponseEntity<List<Rating>> listrating(@PathVariable (value = "userId") int id) {
+//        try {
+//            return new ResponseEntity<>(ratingService.getRatingOfCusId(id),HttpStatus.OK);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
     
-    @PostMapping("/login/")
+    @PostMapping("/login")
     @CrossOrigin
     public ResponseEntity<String> login(@RequestBody User user) {
         if (this.userService.authUser(user.getUsername(), user.getPassword()) == true) {
@@ -73,11 +73,11 @@ public class ApiUserController {
         return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
     }
     
-    @GetMapping(path = "/current-user/", produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin
-    public ResponseEntity<User> details(Principal user) {
-        User u = this.userService.getUserByUsername(user.getName());
-        return new ResponseEntity<>(u, HttpStatus.OK);
-    }
+//    @GetMapping(path = "/current-user/", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @CrossOrigin
+//    public ResponseEntity<User> details(Principal user) {
+//        User u = this.userService.getUserByUsername(user.getName());
+//        return new ResponseEntity<>(u, HttpStatus.OK);
+//    }
 
 }

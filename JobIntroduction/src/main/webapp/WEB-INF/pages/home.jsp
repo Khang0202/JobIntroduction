@@ -41,7 +41,7 @@
                         <td>${j.name}</td>
                         <td>${j.posterName}</td>
                         <td>
-                            <c:url value="api/job/${j.id}" var="apiDel" />
+                            <c:url value="api/job/deljob/${j.id}" var="apiDel" />
                             <a href="${action}job/${j.id}" class="btn btn-success">Info</a>
                             <a class="btn btn-danger" onclick="delJob('${apiDel}', ${j.id})">Delete</a>
                             <script>
