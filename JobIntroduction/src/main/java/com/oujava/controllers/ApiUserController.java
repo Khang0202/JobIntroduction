@@ -67,7 +67,8 @@ public class ApiUserController {
     @CrossOrigin
     public ResponseEntity<String> login(@RequestBody User user) {
         if (this.userService.authUser(user.getUsername(), user.getPassword()) == true) {
-            String token = this.JwtService.generateTokenLogin(user.getUsername());
+            String token = JwtService.generateTokenLogin(user.getUsername());
+            System.out.println(token);
             return new ResponseEntity<>(token, HttpStatus.OK);
         }
         return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
