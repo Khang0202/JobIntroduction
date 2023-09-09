@@ -4,13 +4,10 @@
  */
 package com.oujava.service.impl;
 
-import com.oujava.format.GetDate;
 import com.oujava.pojo.Job;
-import com.oujava.pojo.User;
 import com.oujava.repository.EmploymentTypeRepository;
 import com.oujava.repository.JobRepository;
 import com.oujava.service.JobService;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,36 +18,21 @@ import org.springframework.stereotype.Service;
  * @author trann
  */
 @Service
-public class JobServiceImpl implements JobService{
+public class JobServiceImpl implements JobService {
+
     @Autowired
     private JobRepository jobRepo;
     @Autowired
     private EmploymentTypeRepository employmentTypeRepository;
 
-    
     @Override
     public List<Job> getAllJobs() {
-        return jobRepo.getAllJobs();
+        return this.jobRepo.getAllJobs();
     }
-    
-    @Override
-    public void addJob(Job job) {
-//        job.setEmploymentTypeId(employmentTypeRepository.getEmTypeById(job.getEmTypeTemp()));
-        job.setEmployerId(new User(2));
-        job.setDatePosted(new Date());
-        jobRepo.addJob(job);
-    }
-
-    @Override
-    public void editJobById(int id, Job updatedJob) {
-//        updatedJob.setEmploymentTypeId(employmentTypeRepository.getEmTypeByName(updatedJob.getEmploymentType()));
-    jobRepo.editJobById(id, updatedJob);
-    
-}
 
     @Override
     public boolean deleteJobById(int id) {
-        return jobRepo.deleteJobById(id);
+        return this.jobRepo.deleteJobById(id);
     }
 
     @Override
@@ -67,6 +49,10 @@ public class JobServiceImpl implements JobService{
     public Job getJobById(int id) {
         return this.jobRepo.getJobById(id);
     }
-    
-  
+
+    @Override
+    public boolean addOrUpdateJob(Job job) {
+        return this.jobRepo.addOrUpdateJob(job);
+    }
+
 }

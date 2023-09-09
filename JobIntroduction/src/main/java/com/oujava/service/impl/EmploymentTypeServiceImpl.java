@@ -23,22 +23,22 @@ public class EmploymentTypeServiceImpl implements EmploymentTypeService {
 
     @Override
     public List<EmploymentType> getAllEmType() {
-        return employmentTypeRepository.getAllEmType();
+        return this.employmentTypeRepository.getAllEmType();
     }
 
     @Override
-    public Boolean addOrUpdateEmType(EmploymentType employmentType) {
+    public boolean addOrUpdateEmType(EmploymentType employmentType) {
         if(!employmentType.getEmployment().isEmpty()){
-            return employmentTypeRepository.addOrUpdateEmType(employmentType);
+            return this.employmentTypeRepository.addOrUpdateEmType(employmentType);
         }else{
             return false;
         }
     }
 
     @Override
-    public Boolean deleteEmTypeById(int id) {
+    public boolean deleteEmTypeById(int id) {
         if(id >= 1){
-            return employmentTypeRepository.deleteEmTypeById(id);
+            return this.employmentTypeRepository.deleteEmTypeById(id);
         }else{
             return false;
         }
@@ -46,12 +46,12 @@ public class EmploymentTypeServiceImpl implements EmploymentTypeService {
 
     @Override
     public EmploymentType getEmTypeByName(String string) {
-        return employmentTypeRepository.getEmTypeByName(string);
+        return this.employmentTypeRepository.getEmTypeByName(string);
     }
 
     @Override
     public EmploymentType getEmTypeById(int id) {
-        return employmentTypeRepository.getEmTypeById(id);
+        return this.employmentTypeRepository.getEmTypeById(id);
     }
 
 }

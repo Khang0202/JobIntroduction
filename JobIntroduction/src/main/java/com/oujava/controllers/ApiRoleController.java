@@ -23,7 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/role")
 public class ApiRoleController {
-     @Autowired
+
+    @Autowired
     private RoleService roleService;
 
     @GetMapping("/rolelist")
@@ -37,5 +38,5 @@ public class ApiRoleController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
 }

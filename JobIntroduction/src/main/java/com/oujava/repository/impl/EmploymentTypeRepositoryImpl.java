@@ -41,13 +41,13 @@ public class EmploymentTypeRepositoryImpl implements EmploymentTypeRepository {
     }
 
     @Override
-    public Boolean addOrUpdateEmType(EmploymentType employmentType) {
-        Session session = sessionFactory.getCurrentSession();
+    public boolean addOrUpdateEmType(EmploymentType employmentType) {
+        Session s = sessionFactory.getCurrentSession();
         try {
             if (employmentType.getId() == null) {
-                session.save(employmentType);
+                s.save(employmentType);
             } else {
-                session.update(employmentType);
+                s.update(employmentType);
             }
             return true;
         } catch (HibernateException e) {
@@ -57,11 +57,11 @@ public class EmploymentTypeRepositoryImpl implements EmploymentTypeRepository {
     }
 
     @Override
-    public Boolean deleteEmTypeById(int id) {
-        Session session = sessionFactory.getCurrentSession();
+    public boolean deleteEmTypeById(int id) {
+        Session s = sessionFactory.getCurrentSession();
         try {
-            if (session.load(EmploymentType.class, id) != null) {
-                session.delete(session.load(EmploymentType.class, id));
+            if (s.load(EmploymentType.class, id) != null) {
+                s.delete(s.load(EmploymentType.class, id));
                 return true;
             } else {
                 return false;
@@ -75,16 +75,16 @@ public class EmploymentTypeRepositoryImpl implements EmploymentTypeRepository {
 
     @Override
     public EmploymentType getEmTypeByName(String string) {
-        Session session = sessionFactory.getCurrentSession();
-        Query q = session.createNamedQuery("EmploymentType.findByEmployment", EmploymentType.class);
+        Session s = sessionFactory.getCurrentSession();
+        Query q = s.createNamedQuery("EmploymentType.findByEmployment", EmploymentType.class);
         q.setParameter("employment", string);
         return (EmploymentType) q.getSingleResult();
     }
 
     @Override
     public EmploymentType getEmTypeById(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        Query q = session.createNamedQuery("EmploymentType.findById", EmploymentType.class);
+        Session s = sessionFactory.getCurrentSession();
+        Query q = s.createNamedQuery("EmploymentType.findById", EmploymentType.class);
         q.setParameter("id", id);
         return (EmploymentType) q.getSingleResult();
     }

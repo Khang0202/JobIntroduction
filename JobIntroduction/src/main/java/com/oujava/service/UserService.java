@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package com.oujava.service;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import com.oujava.pojo.Permission;
 import com.oujava.pojo.Role;
@@ -13,14 +14,23 @@ import java.util.List;
  *
  * @author trann
  */
-public interface UserService extends UserDetailsService{
-    List<User> getAllUsers(); 
+public interface UserService extends UserDetailsService {
+
+    List<User> getAllUsers();
+
     List<Permission> getAllPermissionByUserId(int userId);
+
     User getUserByUsername(String username);
-    User login(String username,String password);
+
+    boolean login(String username, String password);
+
     boolean register(User user);
-    void editRoleByUserId(int userId, int roleId); 
+
+    void editRoleByUserId(int userId, int roleId);
+
     Role getUserRoleByUserId(int id);
-    void editActiveByUserId(int userId, boolean active); 
+
+    boolean editActiveByUserId(int userId, boolean active);
+
     boolean authUser(String username, String password);
 }

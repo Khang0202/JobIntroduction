@@ -32,23 +32,16 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public Boolean addOrUpdateRating(Rating rating) {
-        if (!rating.getComment().isEmpty() || !rating.getComment().equals("")) {
-            if (!rating.getComment().isEmpty()) {
-                return ratingRepo.addOrUpdateRating(rating);
-            }else{
-                return false;
-            }
-        } else {
-            return false;
-        }
+    public boolean addOrUpdateRating(Rating rating) {
+        String comment = rating.getComment();
+        return comment != null && !comment.isEmpty() && ratingRepo.addOrUpdateRating(rating);
     }
 
     @Override
-    public Boolean deleteRatingById(int id) {
-        if(id >= 1){
-            return ratingRepo.deleteRatingById(id);
-        }else{
+    public boolean deleteRatingById(int id) {
+        if (id >= 1) {
+            return this.ratingRepo.deleteRatingById(id);
+        } else {
             return false;
         }
     }

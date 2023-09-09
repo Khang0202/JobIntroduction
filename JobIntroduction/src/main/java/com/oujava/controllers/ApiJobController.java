@@ -39,31 +39,22 @@ public class ApiJobController {
         return new ResponseEntity<>(job, HttpStatus.OK);
     }
 
-//    @PutMapping("/addJob")
-//    @CrossOrigin
-//    public ResponseEntity<String> addJob(@RequestBody Job job) {
-//        this.jobService.addJob(job);
-//        return new ResponseEntity<>("Add job success", HttpStatus.OK);
-//    }
+    @PutMapping("/addOrUpdateJob")
+    @CrossOrigin
+    public ResponseEntity<String> addJob(@RequestBody Job job) {
+        try {
+            if (jobService.addOrUpdateJob(job)) {
+                return ResponseEntity.ok("{\"result\":\"success\"}");
+            } else {
+                return ResponseEntity.ok("{\"result\":\"failed\"}");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-   @PutMapping("/editJob/{id}")
-public ResponseEntity<String> editJobById(@PathVariable int id, @RequestBody Job updatedJob) {
-//    String message = jobService.editJobById(id, updatedJob);
-//
-//    // Kiểm tra thông báo và trả về tương ứng.
-//    if ("Update success".equals(message)) {
-//        return new ResponseEntity<>(message, HttpStatus.OK);
-//    } else if ("You can't edit this job".equals(message)) {
-//        return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
-//    } else {
-//        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-//    }
-        this.jobService.editJobById(id, updatedJob);
-         return new ResponseEntity<>("Edit success", HttpStatus.OK);
-}
-
-
-    @DeleteMapping("/deljob/{id}")
+    @DeleteMapping("/deleteJob/{id}")
     @CrossOrigin
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteJobById(@PathVariable int id) {

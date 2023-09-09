@@ -12,15 +12,18 @@ import java.util.Map;
  *
  * @author nguye
  */
-public interface JobRepository{
+public interface JobRepository {
 
-   List<Job> getAllJobs();
-   Long countJob();
-   List<Job> getJobs(Map<String, String> params);
-   Job getJobById(int id);
-   
-   void addJob(Job job);
-   void editJobById(int id, Job updatedJob); 
-   boolean deleteJobById(int id);
-   
+    List<Job> getAllJobs();
+
+    Long countJob();
+
+    List<Job> getJobs(Map<String, String> params);
+
+    Job getJobById(int id);
+
+    boolean addOrUpdateJob(Job job);
+
+    boolean deleteJobById(int id);
+
 }

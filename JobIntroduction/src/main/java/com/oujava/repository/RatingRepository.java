@@ -12,7 +12,10 @@ import java.util.List;
  * @author trann
  */
 public interface RatingRepository {
+
     List<Rating> getRatingOfCusId(int id);
-    Boolean addOrUpdateRating(Rating rating);
-    Boolean deleteRatingById(int id);
+
+    boolean addOrUpdateRating(Rating rating);
+
+    boolean deleteRatingById(int id);
 }
