@@ -46,14 +46,13 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService);
     }
     @Override
     protected void configure(HttpSecurity http)
             throws Exception {
 
-        http.formLogin()
+        http.formLogin().loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password");
 
@@ -63,6 +62,8 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutSuccessUrl("/login");
         http.exceptionHandling()
                 .accessDeniedPage("/login?accessDenied");
+
+//         http.formLogin().successHandler(this.loginSuccessHandler);
 
 //        http.authorizeRequests().antMatchers("/").permitAll()
 //                .antMatchers("/**/add")

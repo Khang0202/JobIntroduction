@@ -39,8 +39,9 @@
                         <td>${j.name}</td>
                         <td>${j.posterName}</td>
                         <td>
+                            <c:url value="/api/job/deleteJob/${j.id}" var="apiDel" />
                             <a href="${action}job/${j.id}" class="btn btn-success">Info</a>
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-danger" onclick="delJob('${apiDel}', ${j.id})">Delete</button>
                         </td>
                     </tr>
                 </c:forEach>
