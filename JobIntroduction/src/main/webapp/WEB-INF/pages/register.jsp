@@ -11,7 +11,7 @@
 
 <c:url value="/register" var="action" />
 <form:form method="post" action="${action}" 
-           modelAttribute="user" acceptCharset="UTF-8"
+           modelAttribute="user"
            enctype="multipart/form-data">
     <div class="form-floating mt-3 mb-3">
         <form:input type="text" class="form-control" path="firstName" id="firstName"/>

@@ -23,4 +23,5 @@ public interface UserRepository {
     Role getUserRoleByUserId(int id);
     void editActiveByUserId(int userId, boolean active); 
     boolean checkUserAndMail(String input);
+    boolean authUser(String username, String password);
 }

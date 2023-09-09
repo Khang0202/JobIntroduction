@@ -44,4 +44,14 @@ public class EmploymentTypeServiceImpl implements EmploymentTypeService {
         }
     }
 
+    @Override
+    public EmploymentType getEmTypeByName(String string) {
+        return employmentTypeRepository.getEmTypeByName(string);
+    }
+
+    @Override
+    public EmploymentType getEmTypeById(int id) {
+        return employmentTypeRepository.getEmTypeById(id);
+    }
+
 }

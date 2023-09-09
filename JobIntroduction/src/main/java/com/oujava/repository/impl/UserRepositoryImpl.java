@@ -120,10 +120,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUserByUsername(String username) {
-        Session s = this.sessionFactory.getCurrentSession();
+        Session s = this.factory.getObject().getCurrentSession();
         Query q = s.createQuery("FROM User WHERE username=:un");
         q.setParameter("un", username);
-        return (User) q.getSingleResult();
+        List<User> u = q.getResultList();
+        return u.get(0);
     }
 
     @Override
@@ -162,7 +163,6 @@ public class UserRepositoryImpl implements UserRepository {
 //            return null;
 //        }
 //    }
-
     @Override
     public User login(String usernameOrEmail, String password) {
         Session session = sessionFactory.getCurrentSession();
@@ -207,12 +207,11 @@ public class UserRepositoryImpl implements UserRepository {
         return count > 0;
     }
 
-    //add user của thầy
-//    @Override
-//    public User register(User user) {
-//        Session s = this.factory.getObject().getCurrentSession();
-//        s.save(user);
-//        return user;
-//    }
+    @Override
+    public boolean authUser(String username, String password) {
+        User u = this.getUserByUsername(username);
+
+        return this.passEncoder.matches(password, u.getPassword());
+    }
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 /**
  *
@@ -31,8 +32,20 @@ public class JobController {
         return "job";
     }
     @GetMapping(value = "/job/{id}") 
-    public String update(Model model, @PathVariable(value = "id") int id){
+    public String getinfo(Model model, @PathVariable(value = "id") int id){
         model.addAttribute("job", this.JobService.getJobById(id));
+        return "job";
+    }
+    @PutMapping(value = "/job/{id}") 
+    public String update(Model model, @PathVariable(value = "id") int id, Job job){
+        model.addAttribute("job", this.JobService.getJobById(id));
+        this.JobService.editJobById(id, job);
+        return "job";
+    }
+    @PostMapping(value = "/job") 
+    public String add(@ModelAttribute Job job){
+        System.out.println(job.getEmTypeTemp());
+        this.JobService.addJob(job);
         return "job";
     }
 }

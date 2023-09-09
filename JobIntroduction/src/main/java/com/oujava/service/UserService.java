@@ -22,4 +22,5 @@ public interface UserService extends UserDetailsService{
     void editRoleByUserId(int userId, int roleId); 
     Role getUserRoleByUserId(int id);
     void editActiveByUserId(int userId, boolean active); 
+    boolean authUser(String username, String password);
 }

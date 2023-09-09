@@ -146,6 +146,11 @@ public class UserServiceImpl implements UserService {
         return this.userRepo.register(user);
 //        return user;
     }
+    
+    @Override
+    public boolean authUser(String username, String password) {
+        return this.userRepo.authUser(username, password);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {

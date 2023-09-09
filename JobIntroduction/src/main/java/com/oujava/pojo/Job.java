@@ -48,6 +48,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Job implements Serializable {
 
     /**
+     * @return the emTypeTemp
+     */
+    public int getEmTypeTemp() {
+        return emTypeTemp;
+    }
+
+    /**
+     * @param emTypeTemp the emTypeTemp to set
+     */
+    public void setEmTypeTemp(int emTypeTemp) {
+        this.emTypeTemp = emTypeTemp;
+    }
+
+    /**
      * @return the employmentType
      */
     public String getEmploymentType() {
@@ -126,6 +140,7 @@ public class Job implements Serializable {
     @ManyToOne(optional = false)
     @JsonIgnore
     private EmploymentType employmentTypeId;
+    
     @JoinColumn(name = "employer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     @JsonIgnore
@@ -135,6 +150,8 @@ public class Job implements Serializable {
     private String posterName;
     @Transient
     private String employmentType;
+    @Transient
+    private int emTypeTemp;
 
     public Job() {
     }

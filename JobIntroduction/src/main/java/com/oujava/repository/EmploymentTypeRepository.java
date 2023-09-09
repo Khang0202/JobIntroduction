@@ -15,4 +15,6 @@ public interface EmploymentTypeRepository {
     List<EmploymentType> getAllEmType();
     Boolean addOrUpdateEmType(EmploymentType employmentType);
     Boolean deleteEmTypeById(int id);
+    EmploymentType getEmTypeByName(String string);
+    EmploymentType getEmTypeById(int id);
 }

@@ -8,14 +8,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:url value="/job" var="action" />
 <h1 class="text-center mt-1">ĐĂNG TIN TUYỂN DỤNG</h1>
-<form:form method="post" modelAttribute="job">
+<form:form method="post" modelAttribute="job" enctype="form-data">
     <div class="form-floating mt-3 mb-3">
         <form:input type="text" class="form-control" path="name" id="name" placeholder="Tiêu đề"/>
         <label for="name">Tiêu đề</label>
     </div>
     <div class="form-floating mb-3 mt-3">
-        <form:select class="form-select" id="employmentTypeId" name="employmentTypeId" path="employmentTypeId">
+        <form:select class="form-select" id="employmentType" name="employmentType" path="employmentTypeId">
             <c:forEach items="${em}" var="c">
                 <c:choose>
                     <c:when test="${c.id == job.employmentTypeId.id}">
@@ -58,11 +59,7 @@
         <label for="otherinfomation">Thông tin khác nếu có</label>
     </div>
     <div class="form-floating mb-3 mt-3 text-center">
-        <button class="btn btn-info" type="submit">
-            <c:choose>
-                <c:when test="${job.id == null}">Thêm sản phẩm</c:when>
-                <c:otherwise>Cập nhật sản phẩm</c:otherwise>
-            </c:choose>
+        <button class="btn btn-info" type="submit">Thêm sản phẩm
         </button>
     </div>
 

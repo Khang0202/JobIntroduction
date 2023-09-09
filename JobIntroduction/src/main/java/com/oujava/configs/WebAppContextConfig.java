@@ -6,6 +6,7 @@ package com.oujava.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.oujava.format.EmploymentTypeFormatter;
 import com.oujava.format.RoleFormatter;
 import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +86,6 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new RoleFormatter());
+        registry.addFormatter(new EmploymentTypeFormatter());
     }
 }
