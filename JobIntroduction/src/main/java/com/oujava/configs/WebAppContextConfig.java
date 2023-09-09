@@ -6,6 +6,7 @@ package com.oujava.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.oujava.format.EmploymentTypeFormatter;
 import com.oujava.format.RoleFormatter;
 import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +51,7 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-    @Bean
-    public SimpleDateFormat simpleDateFormat() {
-        return new SimpleDateFormat("yyyy-MM-dd");
-    }
+    
     
     @Bean
     public CommonsMultipartResolver multipartResolver() {
@@ -88,16 +86,6 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new RoleFormatter());
-    }
-
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary
-                = new Cloudinary(ObjectUtils.asMap(
-                        "cloud_name", this.environment.getProperty("cloudinary.cloud_name"),
-                        "api_key", this.environment.getProperty("cloudinary.api_id"),
-                        "api_secret", this.environment.getProperty("cloudinary.api_secret"),
-                        "secure", true));
-        return cloudinary;
+        registry.addFormatter(new EmploymentTypeFormatter());
     }
 }

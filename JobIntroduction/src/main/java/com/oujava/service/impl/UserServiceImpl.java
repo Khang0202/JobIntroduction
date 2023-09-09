@@ -13,12 +13,19 @@ import java.util.List;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.oujava.format.GetDate;
+import com.oujava.pojo.StaticClass;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -107,9 +114,6 @@ public class UserServiceImpl implements UserService {
         } catch (ParseException ex) {
             Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-//
-//        u.setSex(user.getSex());
-
 //        String roleIdStr = params.get("roleId");
 //        if (roleIdStr != null && !roleIdStr.isEmpty()) {
 //            try {
@@ -130,27 +134,24 @@ public class UserServiceImpl implements UserService {
                 Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-//        user.setAddress(params.get("address"));
-//        user.setExperience(Integer.parseInt(params.get("experience")));
-//        user.setFilecv(params.get("filecv"));
-//        user.setCurentposition(params.get("currentposition"));
-//        user.setEducation(params.get("education"));
-//        user.setCountry(params.get("country"));
-//        user.setUrlinfo(params.get("urlinfo"));
         return this.userRepo.register(user);
-//        return user;
+    }
+    
+    @Override
+    public boolean authUser(String username, String password) {
+        return this.userRepo.authUser(username, password);
     }
 
-//    @Override
-//    public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
-//        List<User> users = (List<User>) userRepo.getUserByUsername(string);
-//        if (users.isEmpty()) {
-//            throw new UsernameNotFoundException("Không tồn tại!");
-//        }
-//        User u = users.get(0);
-//        Set<GrantedAuthority> authorities = new HashSet<>();
-//        authorities.add(new SimpleGrantedAuthority(u.getUserRole()));
-//        return new org.springframework.security.core.userdetails.User(
-//                u.getUsername(), u.getPassword(), authorities);
-//    }
+    @Override
+    public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
+        User users = this.userRepo.getUserByUsername(string);
+        StaticClass.user = users;
+        if (users == null) {
+            throw new UsernameNotFoundException("Không tồn tại!");
+        }
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(users.getRoleId().getRole()));
+        return new org.springframework.security.core.userdetails.User(
+                users.getUsername(), users.getPassword(), authorities);
+    }
 }

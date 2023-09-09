@@ -6,6 +6,8 @@ package com.oujava.service.impl;
 
 import com.oujava.format.GetDate;
 import com.oujava.pojo.Job;
+import com.oujava.pojo.User;
+import com.oujava.repository.EmploymentTypeRepository;
 import com.oujava.repository.JobRepository;
 import com.oujava.service.JobService;
 import java.util.Date;
@@ -22,6 +24,9 @@ import org.springframework.stereotype.Service;
 public class JobServiceImpl implements JobService{
     @Autowired
     private JobRepository jobRepo;
+    @Autowired
+    private EmploymentTypeRepository employmentTypeRepository;
+
     
     @Override
     public List<Job> getAllJobs() {
@@ -30,12 +35,15 @@ public class JobServiceImpl implements JobService{
     
     @Override
     public void addJob(Job job) {
+//        job.setEmploymentTypeId(employmentTypeRepository.getEmTypeById(job.getEmTypeTemp()));
+        job.setEmployerId(new User(2));
         job.setDatePosted(new Date());
         jobRepo.addJob(job);
     }
 
     @Override
     public void editJobById(int id, Job updatedJob) {
+//        updatedJob.setEmploymentTypeId(employmentTypeRepository.getEmTypeByName(updatedJob.getEmploymentType()));
     jobRepo.editJobById(id, updatedJob);
     
 }

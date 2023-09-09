@@ -193,6 +193,6 @@ public class JobRepositoryImpl implements JobRepository{
         Session s = sessionFactory.getCurrentSession();
         Query q = s.createNamedQuery("Job.findById");
         q.setParameter("id", id);
-        return (Job) q.getResultList();
+        return (Job) q.getSingleResult();
     }
 }

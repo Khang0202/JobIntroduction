@@ -18,4 +18,6 @@ public interface EmploymentTypeService {
     Boolean addOrUpdateEmType (EmploymentType employmentType);
 
     Boolean deleteEmTypeById(int id);
+    EmploymentType getEmTypeByName(String string);
+    EmploymentType getEmTypeById(int id);
 }

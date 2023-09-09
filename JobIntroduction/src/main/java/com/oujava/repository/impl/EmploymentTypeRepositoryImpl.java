@@ -72,4 +72,20 @@ public class EmploymentTypeRepositoryImpl implements EmploymentTypeRepository {
         }
 
     }
+
+    @Override
+    public EmploymentType getEmTypeByName(String string) {
+        Session session = sessionFactory.getCurrentSession();
+        Query q = session.createNamedQuery("EmploymentType.findByEmployment", EmploymentType.class);
+        q.setParameter("employment", string);
+        return (EmploymentType) q.getSingleResult();
+    }
+
+    @Override
+    public EmploymentType getEmTypeById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query q = session.createNamedQuery("EmploymentType.findById", EmploymentType.class);
+        q.setParameter("id", id);
+        return (EmploymentType) q.getSingleResult();
+    }
 }

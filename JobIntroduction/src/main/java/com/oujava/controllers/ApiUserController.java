@@ -4,14 +4,17 @@
  */
 package com.oujava.controllers;
 
+import com.oujava.components.JwtService;
 import com.oujava.pojo.Rating;
 import com.oujava.pojo.User;
 import com.oujava.service.RatingService;
 import com.oujava.service.UserService;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +36,8 @@ public class ApiUserController {
     private UserService userService;
     @Autowired
     private RatingService ratingService;
+    @Autowired
+    private JwtService JwtService;
 
     @PostMapping("/login")
     @CrossOrigin
@@ -56,6 +61,23 @@ public class ApiUserController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    
+    @PostMapping("/login/")
+    @CrossOrigin
+    public ResponseEntity<String> login(@RequestBody User user) {
+        if (this.userService.authUser(user.getUsername(), user.getPassword()) == true) {
+            String token = this.JwtService.generateTokenLogin(user.getUsername());
+            return new ResponseEntity<>(token, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
+    }
+    
+    @GetMapping(path = "/current-user/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
+    public ResponseEntity<User> details(Principal user) {
+        User u = this.userService.getUserByUsername(user.getName());
+        return new ResponseEntity<>(u, HttpStatus.OK);
     }
 
 }
