@@ -40,13 +40,13 @@ public class JobController {
     @PutMapping(value = "/job/{id}") 
     public String update(Model model, @PathVariable(value = "id") int id, Job job){
         model.addAttribute("job", this.JobService.getJobById(id));
-        this.JobService.editJobById(id, job);
+        this.JobService.addOrUpdateJob( job);
         return "job";
     }
     @PostMapping(value = "/job") 
     public String add(@ModelAttribute Job job){
         System.out.println(job.getEmTypeTemp());
-        this.JobService.addJob(job);
+        this.JobService.addOrUpdateJob(job);
         return "job";
     }
     

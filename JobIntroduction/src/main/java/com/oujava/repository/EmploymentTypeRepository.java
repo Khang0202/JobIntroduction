@@ -13,8 +13,8 @@ import java.util.List;
  */
 public interface EmploymentTypeRepository {
     List<EmploymentType> getAllEmType();
-    Boolean addOrUpdateEmType(EmploymentType employmentType);
-    Boolean deleteEmTypeById(int id);
+    boolean addOrUpdateEmType(EmploymentType employmentType);
+    boolean deleteEmTypeById(int id);
     EmploymentType getEmTypeByName(String string);
     EmploymentType getEmTypeById(int id);
 }
