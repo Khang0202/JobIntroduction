@@ -26,25 +26,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/faculty")
 public class ApiFacultyController {
+
     @Autowired
     private FacultyService facultyService;
-    
+
     @GetMapping("/getAllFaculty")
     @CrossOrigin
     public ResponseEntity<List<Faculty>> listFacultys() {
         try {
-            return new ResponseEntity<>(facultyService.getAllFacultys(),HttpStatus.OK);
+            return new ResponseEntity<>(facultyService.getAllFacultys(), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @PostMapping("/addOrUpdateFaculty")
     @CrossOrigin
     public ResponseEntity addOrUpdateFaculty(@RequestBody Faculty faculty) {
         try {
-            if (facultyService.addOrUpdateFaculty(faculty) == true) {
+            if (facultyService.addOrUpdateFaculty(faculty)) {
                 return ResponseEntity.ok("{\"result\":\"success\"}");
             } else {
                 return ResponseEntity.ok("{\"result\":\"failed\"}");
@@ -54,12 +55,12 @@ public class ApiFacultyController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @DeleteMapping("/deleteFacultyById/{id}")
     @CrossOrigin
     public ResponseEntity<String> deleteFacultyById(@PathVariable int id) {
         try {
-            if (facultyService.deleteFacultyById(id) == true) {
+            if (facultyService.deleteFacultyById(id)) {
                 return ResponseEntity.ok("{\"result\":\"success\"}");
             } else {
                 return ResponseEntity.ok("{\"result\":\"failed\"}");

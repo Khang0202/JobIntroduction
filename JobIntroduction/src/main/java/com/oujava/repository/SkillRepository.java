@@ -12,7 +12,7 @@ import java.util.List;
  * @author nguye
  */
 public interface SkillRepository {
-    void addSkill(Skill skill);
-    void deleteSkillById(int id);
+    boolean addSkill(Skill skill);
+    boolean deleteSkillById(int id);
     Skill getAllSkillByUserId(int id);
 }

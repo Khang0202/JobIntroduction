@@ -28,9 +28,9 @@ public class FacultyRepositoryImpl implements FacultyRepository {
 
     @Override
     public List<Faculty> getAllFacultys() {
-        Session session = sessionFactory.getCurrentSession();
+        Session s = sessionFactory.getCurrentSession();
         try {
-            Query q = session.createNamedQuery("Faculty.findAll");
+            Query q = s.createNamedQuery("Faculty.findAll");
             return q.getResultList();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -39,13 +39,13 @@ public class FacultyRepositoryImpl implements FacultyRepository {
     }
 
     @Override
-    public Boolean addOrUpdateFaculty(Faculty faculty) {
-        Session session = sessionFactory.getCurrentSession();
+    public boolean addOrUpdateFaculty(Faculty faculty) {
+        Session s = sessionFactory.getCurrentSession();
         try {
             if (faculty.getId() == null) {
-                session.save(faculty);
+                s.save(faculty);
             } else {
-                session.update(faculty);
+                s.update(faculty);
             }
             return true;
         } catch (HibernateException e) {
@@ -55,11 +55,11 @@ public class FacultyRepositoryImpl implements FacultyRepository {
     }
 
     @Override
-    public Boolean deleteFacultyById(int id) {
-        Session session = sessionFactory.getCurrentSession();
+    public boolean deleteFacultyById(int id) {
+        Session s = sessionFactory.getCurrentSession();
         try {
-            if (session.load(Faculty.class, id) != null) {
-                session.delete(session.load(Faculty.class, id));
+            if (s.load(Faculty.class, id) != null) {
+                s.delete(s.load(Faculty.class, id));
                 return true;
             } else {
                 return false;

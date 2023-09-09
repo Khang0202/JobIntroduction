@@ -11,7 +11,10 @@ import com.oujava.pojo.Skill;
  * @author trann
  */
 public interface SkillService {
-     void addSkill(Skill skill);
-    void deleteSkillById(int id);
+
+    boolean addSkill(Skill skill);
+
+    boolean deleteSkillById(int id);
+
     Skill getAllSkillByUserId(int id);
 }

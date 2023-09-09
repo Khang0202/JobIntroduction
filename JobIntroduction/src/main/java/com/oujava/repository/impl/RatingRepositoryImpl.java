@@ -58,7 +58,7 @@ public class RatingRepositoryImpl implements RatingRepository {
     }
 
     @Override
-    public Boolean addOrUpdateRating(Rating rating) {
+    public boolean addOrUpdateRating(Rating rating) {
         Session session = sessionFactory.getCurrentSession();
         try {
             if (rating.getId() == null) {
@@ -74,7 +74,7 @@ public class RatingRepositoryImpl implements RatingRepository {
     }
 
     @Override
-    public Boolean deleteRatingById(int id) {
+    public boolean deleteRatingById(int id) {
         Session session = sessionFactory.getCurrentSession();
         try {
             if (session.load(Rating.class, id) != null) {

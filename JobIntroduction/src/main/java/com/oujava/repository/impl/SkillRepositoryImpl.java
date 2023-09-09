@@ -24,24 +24,39 @@ public class SkillRepositoryImpl implements SkillRepository {
     private SessionFactory sessionFactory;
 
     @Override
-    public void addSkill(Skill skill) {
-        Session s = this.sessionFactory.getCurrentSession();
-        s.persist(skill);
+    public boolean addSkill(Skill skill) {
+        try {
+            Session s = this.sessionFactory.getCurrentSession();
+            if (skill.getId() == null) {
+                s.save(skill);
+            } else {
+                s.update(skill);
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public void deleteSkillById(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        Skill existingUserId = session.get(Skill.class, id);
-        Skill skill = session.get(Skill.class, id);
-        if (skill != null) {
-            if (skill.getUserid().equals(existingUserId.getUserid())) {
-                session.delete(skill);
+    public boolean deleteSkillById(int id) {
+        try {
+            Session session = sessionFactory.getCurrentSession();
+            Skill skill = session.get(Skill.class, id);
+
+            if (skill != null) {
+                Skill existingUserId = session.get(Skill.class, id);
+
+                if (existingUserId != null && skill.getUserid().equals(existingUserId.getUserid())) {
+                    session.delete(skill);
+                    return true;
+                }
             }
-            else{
-            }
-        }
-        else{
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

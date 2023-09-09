@@ -19,20 +19,29 @@ public class SkillServiceImpl implements SkillService {
 
     @Autowired
     private SkillRepository skillRepo;
-    
+
     @Override
-    public void addSkill(Skill skill) {
-        skillRepo.addSkill(skill);
+    public boolean addSkill(Skill skill) {
+       if(!skill.getSkill().isEmpty()){
+           return this.skillRepo.addSkill(skill);
+       }
+       else return false;
     }
 
     @Override
-    public void deleteSkillById(int id) {
-        skillRepo.deleteSkillById(id);
+    public boolean deleteSkillById(int id) {
+        try {
+            
+            return this.skillRepo.deleteSkillById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public Skill getAllSkillByUserId(int id) {
-        return skillRepo.getAllSkillByUserId(id);
+        return this.skillRepo.getAllSkillByUserId(id);
     }
-    
+
 }

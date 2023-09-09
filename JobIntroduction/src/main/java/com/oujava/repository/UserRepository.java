@@ -14,14 +14,26 @@ import java.util.List;
  * @author nguye
  */
 public interface UserRepository {
-    List<User> getAllUsers(); 
+
+    List<User> getAllUsers();
+
     List<Permission> getAllPermissionByUserId(int userId);
+
     User getUserByUsername(String username);
-    User login(String username,String password);
+    
+    boolean updateUserInfo(int id);
+
+    boolean login(String username, String password);
+
     boolean register(User user);
-    void editRoleByUserId(int userId, int roleId); 
+
+    void editRoleByUserId(int userId, int roleId);
+
     Role getUserRoleByUserId(int id);
-    void editActiveByUserId(int userId, boolean active); 
+
+    boolean editActiveByUserId(int userId, boolean active);
+
     boolean checkUserAndMail(String input);
+
     boolean authUser(String username, String password);
 }

@@ -51,61 +51,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editRoleByUserId(int userId, int roleId) {
-        userRepo.editRoleByUserId(userId, roleId);
+        this.userRepo.editRoleByUserId(userId, roleId);
     }
 
     @Override
-    public void editActiveByUserId(int userId, boolean active) {
-        userRepo.editActiveByUserId(userId, active);
+    public boolean editActiveByUserId(int userId, boolean active) {
+        return this.userRepo.editActiveByUserId(userId, active);
     }
 
     @Override
-    public User login(String usernameOrEmail, String password) {
-        return userRepo.login(usernameOrEmail, password);
+    public boolean login(String usernameOrEmail, String password) {
+        return this.userRepo.login(usernameOrEmail, password);
     }
 
     @Override
     public List<Permission> getAllPermissionByUserId(int userId) {
-        return userRepo.getAllPermissionByUserId(userId);
+        return this.userRepo.getAllPermissionByUserId(userId);
     }
 
     @Override
     public User getUserByUsername(String username) {
-        return userRepo.getUserByUsername(username);
+        return this.userRepo.getUserByUsername(username);
     }
 
     @Override
     public Role getUserRoleByUserId(int id) {
-        return userRepo.getUserRoleByUserId(id);
+        return this.userRepo.getUserRoleByUserId(id);
     }
-
-//    @Override
-//    public User register(Map<String, String> params, MultipartFile avatar) {
-//        User u = new User();
-//        u.setFirstName(params.get("firstName"));
-//        u.setLastName(params.get("lastName"));
-//        u.setPhone(params.get("phone"));
-//        u.setEmail(params.get("email"));
-//        u.setUsername(params.get("username"));
-//        u.setPassword(this.passEncoder.encode(params.get("password")));
-//        try {
-//            u.setBirth(GetDate.getDateFromString(params.get("birth")));
-//        } catch (ParseException ex) {
-//            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        u.setSex(params.get("sex"));
-//        u.setRoleId(new Role(Integer.valueOf( params.get("roleId"))));
-//        if (!avatar.isEmpty()) {
-//                try {
-//                    Map res = this.cloudinary.uploader().upload(avatar.getBytes(), 
-//                            ObjectUtils.asMap("resource_type", "auto"));
-//                    u.setImage(res.get("secure_url").toString());
-//                } catch (IOException ex) {
-//                    Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        return null;
-//    }
+    
     @Override
     public boolean register(User user) {
         user.setPassword(passEncoder.encode(user.getPassword()));
@@ -114,17 +87,6 @@ public class UserServiceImpl implements UserService {
         } catch (ParseException ex) {
             Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        String roleIdStr = params.get("roleId");
-//        if (roleIdStr != null && !roleIdStr.isEmpty()) {
-//            try {
-////                u.setRoleId(new Role(Integer.valueOf(roleIdStr)));
-//                user.setRoleId(user.getRoleId());
-//                
-//            } catch (NumberFormatException ex) {
-//
-//                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, "Invalid roleId format", ex);
-//            }
-//        }
         if (!user.getFile().isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(),
@@ -153,5 +115,10 @@ public class UserServiceImpl implements UserService {
         authorities.add(new SimpleGrantedAuthority(users.getRoleId().getRole()));
         return new org.springframework.security.core.userdetails.User(
                 users.getUsername(), users.getPassword(), authorities);
+    }
+
+    @Override
+    public boolean updateUserInfo(int id) {
+        return this.userRepo.updateUserInfo(id);
     }
 }

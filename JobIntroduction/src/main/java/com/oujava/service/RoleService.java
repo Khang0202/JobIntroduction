@@ -13,5 +13,6 @@ import java.util.Map;
  * @author trann
  */
 public interface RoleService {
+
     List<Role> getAllRole(Map<String, String> params);
 }
