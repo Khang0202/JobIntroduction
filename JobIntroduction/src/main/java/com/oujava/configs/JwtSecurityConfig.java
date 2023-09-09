@@ -35,19 +35,20 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {
     "com.oujava.controllers",
     "com.oujava.repository",
-    "com.oujava.service", 
+    "com.oujava.service",
     "com.oujava.components"
 })
 @Order(1)
-public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
-    
+public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() throws Exception {
         JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter = new JwtAuthenticationTokenFilter();
@@ -70,7 +71,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
-    
+
     @Bean
     public SimpleDateFormat simpleDateFormat() {
         return new SimpleDateFormat("yyyy-MM-dd");
@@ -91,6 +92,12 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers("/api/login").permitAll();
         http.authorizeRequests().antMatchers("/api/user/login**").permitAll();
         http.authorizeRequests().antMatchers("/api/swagger-ui.html").permitAll();
+        http.authorizeRequests().antMatchers("/api/employmentTypes/").permitAll();
+        http.authorizeRequests().antMatchers("/api/faculty/").permitAll();
+        http.authorizeRequests().antMatchers("/api/job/").permitAll();
+        http.authorizeRequests().antMatchers("/api/rating/").permitAll();
+        http.authorizeRequests().antMatchers("/api/skill/").permitAll();
+        http.authorizeRequests().antMatchers("/api/user/").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_ADMIN')")
@@ -99,5 +106,5 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
                 .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
     }
-    
+
 }

@@ -33,4 +33,6 @@ public interface UserService extends UserDetailsService {
     boolean editActiveByUserId(int userId, boolean active);
 
     boolean authUser(String username, String password);
+    
+    boolean updateUserInfo(int id);
 }
