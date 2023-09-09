@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Accordion, Col, Container, Row } from "react-bootstrap";
+import { Accordion, Button, Col, Container, Row } from "react-bootstrap";
 import Apis, { endpoints } from "../configs/Apis";
 import Spiner from "../layout/Spiner";
 import { useSearchParams } from "react-router-dom";
@@ -69,7 +69,9 @@ const Home = () => {
                                     <Col>Người đăng</Col>
                                     <Col xs={10}>{c.otherinfomation}</Col>
                                 </Row>
+                                <Button>Apply</Button>
                             </Accordion.Body>
+                            
                         </Accordion.Item>
                     </Accordion>)}
         </>
