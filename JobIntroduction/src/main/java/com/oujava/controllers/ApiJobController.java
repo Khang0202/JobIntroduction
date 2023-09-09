@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author trann
  */
 @RestController
-@RequestMapping("/api/job")
+@RequestMapping("/api")
 
 public class ApiJobController {
 
@@ -62,9 +63,10 @@ public ResponseEntity<String> editJobById(@PathVariable int id, @RequestBody Job
 }
 
 
-    @DeleteMapping("/deleteJob/{id}")
-    public ResponseEntity<String> deleteJobById(@PathVariable int id) {
-        jobService.deleteJobById(id);
-        return new ResponseEntity<>("Delete job success", HttpStatus.OK);
+    @DeleteMapping("/job/{id}")
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteJobById(@PathVariable int id) {
+        this.jobService.deleteJobById(id);
     }
 }

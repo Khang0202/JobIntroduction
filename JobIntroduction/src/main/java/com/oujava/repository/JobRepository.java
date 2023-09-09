@@ -21,6 +21,6 @@ public interface JobRepository{
    
    void addJob(Job job);
    void editJobById(int id, Job updatedJob); 
-   void deleteJobById(int id); 
+   boolean deleteJobById(int id);
    
 }

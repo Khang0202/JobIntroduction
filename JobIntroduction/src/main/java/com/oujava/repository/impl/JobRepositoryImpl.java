@@ -116,15 +116,19 @@ public class JobRepositoryImpl implements JobRepository{
     }
        
 }
+    
 
     @Override
-    public void deleteJobById(int id) {
+    public boolean deleteJobById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Job existingJob = session.get(Job.class, id);
-        if (existingJob != null) {
-            session.delete(existingJob);
+//        Job existingJob = session.load(Job.class, id);
+        Job j = getJobById(id);
+        if (j != null) {
+            session.delete(j);
+            return true;
         }
-        else{}
+        else{
+        return false;}
        
     }
 
@@ -191,8 +195,6 @@ public class JobRepositoryImpl implements JobRepository{
     @Override
     public Job getJobById(int id) {
         Session s = sessionFactory.getCurrentSession();
-        Query q = s.createNamedQuery("Job.findById");
-        q.setParameter("id", id);
-        return (Job) q.getSingleResult();
+        return s.get(Job.class, id);
     }
 }

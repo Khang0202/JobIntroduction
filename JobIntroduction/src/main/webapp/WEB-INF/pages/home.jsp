@@ -6,6 +6,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <c:url value="/" var="action" />
 <section class="container">
     <div class="container mt-4">
@@ -39,9 +41,24 @@
                         <td>${j.name}</td>
                         <td>${j.posterName}</td>
                         <td>
-                            <c:url value="/api/job/deleteJob/${j.id}" var="apiDel" />
+                            <c:url value="api/job/${j.id}" var="apiDel" />
                             <a href="${action}job/${j.id}" class="btn btn-success">Info</a>
-                            <button class="btn btn-danger" onclick="delJob('${apiDel}', ${j.id})">Delete</button>
+                            <a class="btn btn-danger" onclick="delJob('${apiDel}', ${j.id})">Delete</a>
+                            <script>
+                                function delJob(path, id) {
+                                    console.log(path);
+                                    if (confirm("Bạn chắc chắn xóa không?") === true) {
+                                        fetch(path, {
+                                            method: "delete"
+                                        }).then(res => {
+                                            if (res.status === 204)
+                                                location.reload();
+                                            else
+                                                alert("Something wrong!!!");
+                                        });
+                                    }
+                                }
+                            </script>
                         </td>
                     </tr>
                 </c:forEach>
@@ -49,3 +66,5 @@
         </table>
     </div>
 </section>
+
+<script src="<c:url value="/resources/js/main.js" />"></script>
