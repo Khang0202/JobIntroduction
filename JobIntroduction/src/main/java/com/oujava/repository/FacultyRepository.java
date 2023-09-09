@@ -13,6 +13,6 @@ import java.util.List;
  */
 public interface FacultyRepository {
     List<Faculty> getAllFacultys();
-    Boolean addOrUpdateFaculty(Faculty faculty);
-    Boolean deleteFacultyById(int id);
+    boolean addOrUpdateFaculty(Faculty faculty);
+    boolean deleteFacultyById(int id);
 }
