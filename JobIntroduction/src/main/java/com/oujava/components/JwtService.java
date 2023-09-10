@@ -72,6 +72,7 @@ public class JwtService {
         String username = null;
         try {
             JWTClaimsSet claims = getClaimsFromToken(token);
+            System.out.println(token);
             username = claims.getStringClaim("username");
         } catch (ParseException e) {
             System.err.println(e.getMessage());

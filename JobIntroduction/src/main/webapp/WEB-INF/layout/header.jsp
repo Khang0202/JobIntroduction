@@ -30,12 +30,21 @@
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/" />">${pageContext.request.userPrincipal.name}</a>
+                            <a class="nav-link" name="username" href="${action}?username=${pageContext.request.userPrincipal.name}">
+                                ${pageContext.request.userPrincipal.name}
+                            </a>
+                            <!--                            <a class="nav-link" name="username" value="${pageContext.request.userPrincipal.name}" />${pageContext.request.userPrincipal.name}</a>-->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/login" />">Đăng xuất</a>
                         </li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/login" />">Đăng nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/register" />">Đăng ký</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

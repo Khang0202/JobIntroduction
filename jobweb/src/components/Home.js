@@ -5,8 +5,7 @@ import Spiner from "../layout/Spiner";
 import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
-    const [employmentType, setEmploymentType] = useState([])
-    const[q] = useSearchParams();
+    // const[q] = useSearchParams();
 
     const [job, setJob] = useState(null)
     useEffect(() => {
@@ -14,15 +13,13 @@ const Home = () => {
             try {
                 let e = endpoints["getAllJob"];
                 let res = await Apis.get(e);
-                let kw = q.get("kw");
-                if(kw !== null) e = `${e}?kw=${kw}`
                 setJob(res.data)
             } catch (error) {
                 console.error(error);
             }
         }
         loadJob();
-    }, [q])
+    }, [])
 
     if (job === null) return <Spiner />
     return (
@@ -71,7 +68,6 @@ const Home = () => {
                                 </Row>
                                 <Button>Apply</Button>
                             </Accordion.Body>
-                            
                         </Accordion.Item>
                     </Accordion>)}
         </>
