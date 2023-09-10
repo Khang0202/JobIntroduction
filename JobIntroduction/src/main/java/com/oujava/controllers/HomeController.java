@@ -4,9 +4,9 @@
  */
 package com.oujava.controllers;
 
-
 import com.oujava.pojo.Job;
 import com.oujava.pojo.StaticClass;
+import com.oujava.pojo.User;
 import com.oujava.repository.impl.UserRepositoryImpl;
 import com.oujava.service.EmploymentTypeService;
 import com.oujava.service.JobService;
@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @ControllerAdvice
 @PropertySource("classpath:configs.properties")
 public class HomeController {
-    
+
     @Autowired
     private EmploymentTypeService employmentTypeService;
     @Autowired
@@ -50,26 +50,31 @@ public class HomeController {
     private UserService userService;
     @Autowired
     private Environment env;
-    
-    
+
     @ModelAttribute
     public void commonAttr(Model model) {
         model.addAttribute("em", employmentTypeService.getAllEmType());
     }
-    
+
     @RequestMapping("/")
     @Transactional
-    public String index(Model model, @RequestParam Map<String, String> params){
-        model.addAttribute("job",jobService.getJobs(params));
-        
+    public String index(Model model, @RequestParam Map<String, String> params) {
+        String un = params.get("username");
+        if(un != null)
+            StaticClass.user = userService.getUserByUsername(un);
+        model.addAttribute("job", jobService.getJobs(params));
+        if (StaticClass.user != null) {
+            System.out.println(StaticClass.user.getUsername());
+        }
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
         Long count = jobService.countJob();
-        model.addAttribute("counter", Math.ceil(count*1.0/pageSize));
-        
+        model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));
+
         return "home";
     }
-    @DeleteMapping(value = "/deljob/{id}") 
-    public String del(@PathVariable(value = "id") int id){
+
+    @DeleteMapping(value = "/deljob/{id}")
+    public String del(@PathVariable(value = "id") int id) {
         this.jobService.deleteJobById(id);
         return "home";
     }

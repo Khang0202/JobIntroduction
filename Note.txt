@@ -1,0 +1,4 @@
+deloy react
+open cmd
+cd to file
+type "npm install react-router-dom@6 axios react-bootstrap bootstrap react-cookies" then enter
