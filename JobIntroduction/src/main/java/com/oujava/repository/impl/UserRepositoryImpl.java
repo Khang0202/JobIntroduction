@@ -203,11 +203,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
     
     @Override
-    public boolean updateUserInfo(int id) {
+    public boolean updateUserInfo(String username) {
         try {
             Session s = sessionFactory.getCurrentSession();
-            User user = s.get(User.class, id);
-            if (user.getId() != null) {
+            User user = s.get(User.class, username);
+            if (user.getUsername()!= null) {
                 s.update(user);
                 return true;
             } else {

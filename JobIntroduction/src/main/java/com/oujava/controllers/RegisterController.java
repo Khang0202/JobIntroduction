@@ -5,6 +5,7 @@
 package com.oujava.controllers;
 
 import com.oujava.format.GetDate;
+import com.oujava.pojo.Role;
 import com.oujava.pojo.StaticClass;
 import com.oujava.pojo.User;
 import com.oujava.service.RoleService;
@@ -35,9 +36,9 @@ public class RegisterController {
 
     @ModelAttribute
     public void commonAttr(Model model) {
-        
+
     }
-    
+
     @GetMapping("/register")
     public String register(Model model, @RequestParam Map<String, String> params) {
 
@@ -47,16 +48,19 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String add(@ModelAttribute(value = "user") User user ) {
-//        if (!rs.hasErrors()) {
-//user.setBirth(new Date());
-            if (userService.register(user) == true) {
-                return "redirect:/";
-            }
-//        }
+    public String add(@ModelAttribute(value = "user") User user) {
+        
+        Role role = new Role(); 
+        role.setId(1); 
+        user.setRoleId(role);
+
+        if (userService.register(user)) {
+            return "redirect:/login";
+        }
+        
         System.out.println("First Name: " + user.getFirstName());
         System.out.println("Last Name: " + user.getLastName());
-        return "register";
+        return "redirect:/";
     }
     
     @GetMapping(value = "/register/{username}") 

@@ -59,7 +59,7 @@
         <label for="otherinfomation">Thông tin khác nếu có</label>
     </div>
     <div class="form-floating mb-3 mt-3 text-center">
-        <button class="btn btn-info" type="submit">Thêm sản phẩm
+        <button class="btn btn-info" type="submit">Thêm công việc
         </button>
     </div>
 

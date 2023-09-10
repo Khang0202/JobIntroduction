@@ -78,4 +78,5 @@ public class HomeController {
         this.jobService.deleteJobById(id);
         return "home";
     }
+    
 }

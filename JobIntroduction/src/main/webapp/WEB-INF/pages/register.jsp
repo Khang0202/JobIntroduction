@@ -22,14 +22,6 @@
         <label for="lastName">Họ</label>
     </div>
     <div class="form-floating mt-3 mb-3">
-        <form:select class="form-select" id="role" name="role" path="roleId">
-            <c:forEach items="${role}" var="c">
-                <option value="${c.id}">${c.role}</option>
-            </c:forEach>
-        </form:select>
-        <label for="role">Vị trí</label>
-    </div>
-    <div class="form-floating mt-3 mb-3">
         <form:input type="text" class="form-control" path="email" id="email"/>
         <label for="email">Email</label>
     </div>
@@ -42,12 +34,12 @@
         <label for="phone">Số điện thoại liên hệ</label>
     </div>
     <div class="form-floating mt-3 mb-3">
-        <form:input type="text" class="form-control" path="username" id="username"/>
-        <label for="username">username</label>
-    </div>
-    <div class="form-floating mt-3 mb-3">
         <form:input type="date" class="form-control" path="birthform" id="birthform"/>
         <label for="birthform">Ngày sinh</label>
+    </div>
+    <div class="form-floating mt-3 mb-3">
+        <form:input type="text" class="form-control" path="username" id="username"/>
+        <label for="username">username</label>
     </div>
     <div class="form-floating mt-3 mb-3">
         <form:input type="text" class="form-control" path="password" id="password"/>
@@ -57,9 +49,8 @@
         <form:input type="file" class="form-control" path="file" id="file"/>
         <label for="file">Email</label>
     </div>
-
     <div class="form-floating mb-3 mt-3 text-center">
-        <button class="btn btn-info" type="submit">Đăng ký
+        <button class="btn btn-info" type="submit" id="registerButton">Đăng ký
         </button>
     </div>
 </form:form>

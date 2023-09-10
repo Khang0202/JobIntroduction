@@ -87,6 +87,7 @@ public class UserServiceImpl implements UserService {
         } catch (ParseException ex) {
             Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        user.setActive(Boolean.TRUE);
         if (!user.getFile().isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(),
@@ -116,9 +117,11 @@ public class UserServiceImpl implements UserService {
         return new org.springframework.security.core.userdetails.User(
                 users.getUsername(), users.getPassword(), authorities);
     }
+     
+    
 
     @Override
-    public boolean updateUserInfo(int id) {
-        return this.userRepo.updateUserInfo(id);
+    public boolean updateUserInfo(String username) {
+        return this.userRepo.updateUserInfo(username);
     }
 }

@@ -19,14 +19,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${action}?page=1">Home</a>
                 </li>
-                <c:forEach items="${em}" var="e">
-                    <c:url value="/" var="searchUrl">
-                        <c:param name="emTypeId" value="${e.id}"></c:param>
-                    </c:url>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${searchUrl}">${e.employment}</a>
-                    </li>
-                </c:forEach>
+
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item">

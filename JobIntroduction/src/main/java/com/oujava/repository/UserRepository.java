@@ -21,7 +21,7 @@ public interface UserRepository {
 
     User getUserByUsername(String username);
     
-    boolean updateUserInfo(int id);
+    boolean updateUserInfo(String username);
 
     boolean login(String username, String password);
 
