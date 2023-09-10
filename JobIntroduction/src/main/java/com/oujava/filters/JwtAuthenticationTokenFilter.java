@@ -5,6 +5,7 @@
 package com.oujava.filters;
 
 import com.oujava.components.JwtService;
+import com.oujava.pojo.StaticClass;
 import com.oujava.pojo.User;
 import com.oujava.service.UserService;
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class JwtAuthenticationTokenFilter extends UsernamePasswordAuthentication
                 boolean accountNonLocked = true;
                 
                 Set<GrantedAuthority> authorities = new HashSet<>();
-                authorities.add(new SimpleGrantedAuthority(userService.getUserRoleByUserId(user.getId()).getRole()));
+                authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 
                 UserDetails userDetail = new org.springframework.security.core.userdetails.User(username, user.getPassword(), enabled, accountNonExpired,
                         credentialsNonExpired, accountNonLocked, authorities);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +35,16 @@ public class ApiJobController {
     @Autowired
     private JobService jobService;
 
-    @GetMapping("/jobslist")
+    @GetMapping("/jobslist/")
     @CrossOrigin
     public ResponseEntity<List<Job>> listJobs(@RequestParam Map<String, String> params) {
+        List<Job> job = this.jobService.getJobs(params);
+        return new ResponseEntity<>(job, HttpStatus.OK);
+    }
+    
+    @PostMapping("/jobslist/")
+    @CrossOrigin
+    public ResponseEntity<List<Job>> listKey(@RequestParam Map<String, String> params) {
         List<Job> job = this.jobService.getJobs(params);
         return new ResponseEntity<>(job, HttpStatus.OK);
     }

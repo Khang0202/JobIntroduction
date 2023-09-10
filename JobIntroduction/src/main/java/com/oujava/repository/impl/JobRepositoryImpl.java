@@ -135,6 +135,7 @@ public List<Job> getAllJobs() {
         List<Job> jobs = query.getResultList();
         for (Job j : jobs) {
             j.setPosterName(j.getEmployerId().getFirstName());
+            j.setEmploymentType(j.getEmploymentTypeId().getEmployment());
         }
         return jobs;
     }

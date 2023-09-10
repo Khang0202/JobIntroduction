@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author trann
  */
 @RestController
-@RequestMapping("/api/skills")
+@RequestMapping("/api/skill")
 public class ApiSkillController {
 
     @Autowired

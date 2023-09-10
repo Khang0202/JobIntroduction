@@ -4,6 +4,7 @@
  */
 package com.oujava.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
@@ -158,16 +159,22 @@ public class User implements Serializable {
     @Column(name = "urlinfo")
     private String urlinfo;
     @OneToMany(mappedBy = "candidateId")
+    @JsonIgnore
     private Set<Apply> applySet;
     @OneToMany(mappedBy = "employerId")
+    @JsonIgnore
     private Set<Apply> applySet1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    @JsonIgnore
     private Set<Skill> skillSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employerId")
+    @JsonIgnore
     private Set<Rating> ratingSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidateId")
+    @JsonIgnore
     private Set<Rating> ratingSet1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employerId")
+    @JsonIgnore
     private Set<Job> jobSet;
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     @ManyToOne

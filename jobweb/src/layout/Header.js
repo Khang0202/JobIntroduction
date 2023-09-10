@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navbar, Nav, Container, NavDropdown, Row, Col, Button, Form, } from "react-bootstrap";
 import Apis, { endpoints } from "../configs/Apis";
 import Spiner from "./Spiner";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { MyUserContext } from "../App";
 
 const Header = () => {
+    const [user, dispatch] = useContext(MyUserContext);
     const [employmentType, setEmploymentType] = useState([])
-    const [kw, setKw] = useState("")
+    const [key, setKey] = useState("")
     const nav = useNavigate();
+    const[q] = useSearchParams();
     useEffect(() => {
         const loadEmType = async () => {
             // let res = await fetch("http://localhost:8080/JobIntroduction/api/employmentTypes/getAllEmploymentType");
@@ -16,26 +19,42 @@ const Header = () => {
             setEmploymentType(res.data)
         }
         loadEmType();
-    }, [])
+    }, [q])
+
+    
+
+    const logout = () => {
+        dispatch({
+            "type": "logout"
+        })
+    }
 
     const search = (evt) => {
         evt.preventDefault();
-        nav(`/?kw=${kw}`)
+        nav(`/?key=${key}`)
     }
 
     if (employmentType === null) return <Spiner />
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand href="#">JobIntroduction</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
+                        <Link className="nav-link" to="/">Home</Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            {employmentType.map(c => <NavDropdown.Item href="#action/3.1" key={c.id}>{c.employment}</NavDropdown.Item>)}
+                        {employmentType.map(c => <Link className="dropdown-item" to={`/?emTypeId=${c.id}`} key={c.id}>{c.employment}</Link>)}
                         </NavDropdown>
+                        {user === null ? <>
+                        <Link className="nav-link" to="/login">Đăng nhập</Link>
+                        <Link className="nav-link" to="/register">Đăng ký</Link>
+                        </> 
+                         : <>
+                            <Link className="nav-link" to="/">{user.firstName}</Link>
+                            <Button xs="auto" variant="secondary" onClick={logout}>Đăng xuất</Button>
+                        </>}
+                        
                     </Nav>
                 </Navbar.Collapse>
                 <Form onSubmit={search} inline>
@@ -43,8 +62,8 @@ const Header = () => {
                         <Col xs="auto">
                             <Form.Control
                                 type="text"
-                                value={kw}
-                                onChange={e => setKw(e.target.value)}
+                                value={key}
+                                onChange={e => setKey(e.target.value)}
                                 placeholder="Search"
                                 className=" mr-sm-2"
                             />
