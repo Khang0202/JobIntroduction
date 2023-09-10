@@ -4,21 +4,13 @@
  */
 package com.oujava.controllers;
 
-
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
- * @author nguye
+ * @author trann
  */
 @Controller
-public class LoginController {
+public class AdminController {
     
-   
-    
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
 }

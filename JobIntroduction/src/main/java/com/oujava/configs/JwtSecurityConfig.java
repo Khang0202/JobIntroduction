@@ -90,7 +90,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         // Disable crsf cho đường dẫn /rest/**
         http.csrf().ignoringAntMatchers("/api/**");
         http.authorizeRequests().antMatchers("/api/login").permitAll();
-        http.authorizeRequests().antMatchers("/api/user/login**").permitAll();
+        http.authorizeRequests().antMatchers("/api/user/login").permitAll();
         http.authorizeRequests().antMatchers("/api/swagger-ui.html").permitAll();
         http.authorizeRequests().antMatchers("/api/employmentTypes/").permitAll();
         http.authorizeRequests().antMatchers("/api/faculty/").permitAll();
@@ -98,6 +98,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/rating/").permitAll();
         http.authorizeRequests().antMatchers("/api/skill/").permitAll();
         http.authorizeRequests().antMatchers("/api/user/").permitAll();
+        http.authorizeRequests().antMatchers("/api/user/register").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_ADMIN')")

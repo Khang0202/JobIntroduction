@@ -19,23 +19,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${action}?page=1">Home</a>
                 </li>
-                <c:forEach items="${em}" var="e">
-                    <c:url value="/" var="searchUrl">
-                        <c:param name="emTypeId" value="${e.id}"></c:param>
-                    </c:url>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${searchUrl}">${e.employment}</a>
-                    </li>
-                </c:forEach>
+
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/" />">${pageContext.request.userPrincipal.name}</a>
+                            <a class="nav-link" href="<c:url value='${pageContext.request.userPrincipal.name}' />">${pageContext.request.userPrincipal.name}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="<c:url value="/logout" />">Đăng xuất</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="<c:url value="/admin" />">admin</a>
                         </li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/login" />">Đăng nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/register" />">Đăng ký</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

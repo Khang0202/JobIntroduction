@@ -6,6 +6,7 @@ package com.oujava.controllers;
 
 
 import com.oujava.pojo.Job;
+import com.oujava.pojo.StaticClass;
 import com.oujava.repository.impl.UserRepositoryImpl;
 import com.oujava.service.EmploymentTypeService;
 import com.oujava.service.JobService;
@@ -46,6 +47,8 @@ public class HomeController {
     @Autowired
     private JobService jobService;
     @Autowired
+    private UserService userService;
+    @Autowired
     private Environment env;
     
     
@@ -70,4 +73,5 @@ public class HomeController {
         this.jobService.deleteJobById(id);
         return "home";
     }
+    
 }

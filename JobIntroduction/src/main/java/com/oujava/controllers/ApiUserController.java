@@ -86,11 +86,11 @@ public class ApiUserController {
 
     }
     
-    @PostMapping("/updateUserInfo/{id}")
+    @PostMapping("/updateUserInfo/{username}")
     @CrossOrigin
-    public ResponseEntity<String> updateUserInfo(@PathVariable int id, @RequestBody User updatedUser){
+    public ResponseEntity<String> updateUserInfo(@PathVariable String username, @RequestBody User updatedUser){
      try {
-            if (userService.updateUserInfo(id)) {
+            if (userService.updateUserInfo(username)) {
                 return ResponseEntity.ok("{\"message\":\"Update success\"}");
             } else {
                 return ResponseEntity.badRequest().body("{\"message\":\"Update failed\"}");

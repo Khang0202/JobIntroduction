@@ -34,5 +34,5 @@ public interface UserService extends UserDetailsService {
 
     boolean authUser(String username, String password);
     
-    boolean updateUserInfo(int id);
+   boolean updateUserInfo(String username);
 }
