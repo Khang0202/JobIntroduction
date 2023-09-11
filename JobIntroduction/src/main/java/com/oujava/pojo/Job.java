@@ -138,7 +138,6 @@ public class Job implements Serializable {
     private Date datePosted;
     @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
     private EmploymentType employmentTypeId;
     
     @JoinColumn(name = "employer_id", referencedColumnName = "id")

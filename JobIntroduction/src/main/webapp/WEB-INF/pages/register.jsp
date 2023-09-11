@@ -47,7 +47,7 @@
     </div>
     <div class="form-floating mt-3 mb-3">
         <form:input type="file" class="form-control" path="file" id="file"/>
-        <label for="file">Email</label>
+        <label for="file">Hình ảnh</label>
     </div>
     <div class="form-floating mb-3 mt-3 text-center">
         <button class="btn btn-info" type="submit" id="registerButton">Đăng ký

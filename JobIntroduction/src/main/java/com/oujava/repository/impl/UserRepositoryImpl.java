@@ -4,14 +4,18 @@
  */
 package com.oujava.repository.impl;
 
+import com.oujava.format.GetDate;
 import com.oujava.pojo.Permission;
 import com.oujava.pojo.Role;
 import com.oujava.pojo.RolePermission;
 import com.oujava.pojo.User;
 import com.oujava.repository.UserRepository;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -173,11 +177,16 @@ public class UserRepositoryImpl implements UserRepository {
     
     @Override
     public boolean register(User user) {
+        Session s = this.sessionFactory.getCurrentSession();
         if (checkUserAndMail(user.getUsername()) || checkUserAndMail(user.getEmail())) {
             return false;
         }
-        user.setBirth(new Date());
-        Session s = this.sessionFactory.getCurrentSession();
+        try {
+            user.setBirth(GetDate.getDateFromString(user.getBirthform()));
+        } catch (ParseException ex) {
+            Logger.getLogger(UserRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         s.save(user);
         return true;
     }

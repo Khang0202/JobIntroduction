@@ -6,9 +6,12 @@ package com.oujava.repository.impl;
 
 import com.oujava.pojo.EmploymentType;
 import com.oujava.pojo.Job;
+import com.oujava.pojo.StaticClass;
 import com.oujava.pojo.User;
 import com.oujava.repository.JobRepository;
+import com.oujava.service.EmploymentTypeService;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -35,40 +38,41 @@ public class JobRepositoryImpl implements JobRepository {
     private SessionFactory sessionFactory;
     @Autowired
     private Environment env;
+    @Autowired
+    private EmploymentTypeService emService;
 
-@Override
-public List<Job> getAllJobs() {
-    Session s = this.sessionFactory.getCurrentSession();
-    CriteriaBuilder criteriaBuilder = s.getCriteriaBuilder();
-    CriteriaQuery<Job> criteriaQuery = criteriaBuilder.createQuery(Job.class);
-    Root rootJob = criteriaQuery.from(Job.class);
-    Root rootEmploymentType = criteriaQuery.from(EmploymentType.class);
-    Root rootUser = criteriaQuery.from(User.class);
+    @Override
+    public List<Job> getAllJobs() {
+        Session s = this.sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = s.getCriteriaBuilder();
+        CriteriaQuery<Job> criteriaQuery = criteriaBuilder.createQuery(Job.class);
+        Root rootJob = criteriaQuery.from(Job.class);
+        Root rootEmploymentType = criteriaQuery.from(EmploymentType.class);
+        Root rootUser = criteriaQuery.from(User.class);
 
-    criteriaQuery.multiselect(
-            rootJob.get("id"),
-            rootUser.get("firstName"),
-            rootJob.get("name"),
-            rootEmploymentType.get("employment"),
-            rootJob.get("salary"),
-            rootJob.get("description"),
-            rootJob.get("company"),
-            rootJob.get("address"),
-            rootJob.get("phone"),
-            rootJob.get("emailcompany"),
-            rootJob.get("otherinfomation"),
-            rootJob.get("datePosted")
-    );
-    List<Predicate> predicates = new ArrayList<>();
-    predicates.add(criteriaBuilder.equal(rootJob.get("employmentTypeId"), rootEmploymentType.get("id")));
-    predicates.add(criteriaBuilder.equal(rootJob.get("employerId"), rootUser.get("id")));
-    criteriaQuery.where(predicates.toArray(Predicate[]::new));
-    criteriaQuery.orderBy(criteriaBuilder.asc(rootJob.get("id")));
+        criteriaQuery.multiselect(
+                rootJob.get("id"),
+                rootUser.get("firstName"),
+                rootJob.get("name"),
+                rootEmploymentType.get("employment"),
+                rootJob.get("salary"),
+                rootJob.get("description"),
+                rootJob.get("company"),
+                rootJob.get("address"),
+                rootJob.get("phone"),
+                rootJob.get("emailcompany"),
+                rootJob.get("otherinfomation"),
+                rootJob.get("datePosted")
+        );
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(criteriaBuilder.equal(rootJob.get("employmentTypeId"), rootEmploymentType.get("id")));
+        predicates.add(criteriaBuilder.equal(rootJob.get("employerId"), rootUser.get("id")));
+        criteriaQuery.where(predicates.toArray(Predicate[]::new));
+        criteriaQuery.orderBy(criteriaBuilder.asc(rootJob.get("id")));
 
-    Query query = s.createQuery(criteriaQuery);
-    return query.getResultList();
-}
-
+        Query query = s.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
 
     @Override
     public boolean deleteJobById(int id) {
@@ -81,6 +85,7 @@ public List<Job> getAllJobs() {
             return false;
         }
     }
+
     @Override
     public Long countJob() {
         Session session = this.sessionFactory.getCurrentSession();
@@ -149,31 +154,13 @@ public List<Job> getAllJobs() {
     @Override
     public boolean addOrUpdateJob(Job job) {
         Session session = this.sessionFactory.getCurrentSession();
-
-        Job existingJob = session.get(Job.class, job.getId());
-
-        if (existingJob != null) {
-
-            if (existingJob.getEmployerId().equals(job.getEmployerId())) {
-                existingJob.setName(job.getName());
-                existingJob.setEmploymentTypeId(job.getEmploymentTypeId());
-                existingJob.setSalary(job.getSalary());
-                existingJob.setDescription(job.getDescription());
-                existingJob.setCompany(job.getCompany());
-                existingJob.setAddress(job.getAddress());
-                existingJob.setPhone(job.getPhone());
-                existingJob.setEmailcompany(job.getEmailcompany());
-                existingJob.setOtherinfomation(job.getOtherinfomation());
-
-                session.update(existingJob);
-                return true;
-            } else {
-
-                return false;
-            }
+        job.setDatePosted(new Date());
+        job.setEmployerId(StaticClass.user);
+        if (job.getId() != null) {
+            session.update(job);
+            return true;
         } else {
-
-            session.persist(job);
+            session.save(job);
             return true;
         }
     }
