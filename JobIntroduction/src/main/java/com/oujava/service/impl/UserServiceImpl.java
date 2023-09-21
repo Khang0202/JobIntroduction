@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
     public boolean register(User user) {
         user.setPassword(passEncoder.encode(user.getPassword()));
         try {
-            user.setBirth(GetDate.getDateFromString(user.getBirthform()));
+            user.setBirth(GetDate.getDateFromString(user.getBirthform().toString()));
         } catch (ParseException ex) {
             Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

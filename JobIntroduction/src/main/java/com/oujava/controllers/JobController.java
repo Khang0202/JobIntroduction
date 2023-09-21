@@ -49,6 +49,4 @@ public class JobController {
         this.JobService.addOrUpdateJob(job);
         return "job";
     }
-    
-    
 }
